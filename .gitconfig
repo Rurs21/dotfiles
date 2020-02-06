@@ -1,0 +1,8 @@
+[user]
+	name = Rurs21
+	email = charles-emile96@hotmail.com
+[color]
+	ui = true
+[core]
+	editor = vim
+	excludesfile = /home/rurs/.gitignore
