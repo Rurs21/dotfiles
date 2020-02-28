@@ -38,7 +38,7 @@
     urgent-foreground:           @red;
     urgent-background:           @transparent-background;
 
-    selected-normal-foreground:  @magenta;
+    selected-normal-foreground:  @blue;
     selected-normal-background:  @base02;
     selected-active-foreground:  @green;
     selected-active-background:  @base02;
