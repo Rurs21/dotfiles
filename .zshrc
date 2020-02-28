@@ -4,8 +4,8 @@ autoload -Uz vcs_info
 zstyle ':vcs_info:*' stagedstr 'M'
 zstyle ':vcs_info:*' unstagedstr 'M'
 zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' actionformats '%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f'
-zstyle ':vcs_info:*' formats '%F{5}[%F{2}%b%F{5}] %F{2}%c%F{3}%u%f'
+zstyle ':vcs_info:*' actionformats '%F{5}[%F{4}%b%F{3}|%F{1}%a%F{5}]%f'
+zstyle ':vcs_info:*' formats '%F{5}[%F{4}%b%F{5}] %F{4}%c%F{3}%u%f'
 zstyle ':vcs_info:git*+set-message:*' hooks git-untracked 
 zstyle ':vcs+info:*' enable git
 +vi-git-untracked() {
@@ -14,7 +14,7 @@ zstyle ':vcs+info:*' enable git
 }
 
 precmd () { vcs_info }
-PROMPT='%F{031}%n%f@%F{070}%m%f %F{080}%~%f ${vcs_info_msg_0_}%f%# '
+PROMPT='%F{031}%n%f@%F{070}%m%f %F{080}%(5~|%-1~/.../%3~|%4~)%f ${vcs_info_msg_0_}%f%# '
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
@@ -31,5 +31,7 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+# Alias
+alias ls='ls --color'
 # dotfiles git
 alias dotfiles='/usr/bin/git --git-dir=/home/rurs/.dotfiles/ --work-tree=/home/rurs'
