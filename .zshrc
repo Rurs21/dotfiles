@@ -6,7 +6,7 @@ zstyle ':vcs_info:*' unstagedstr 'M'
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' actionformats '%F{5}[%F{4}%b%F{3}|%F{1}%a%F{5}]%f'
 zstyle ':vcs_info:*' formats '%F{5}[%F{4}%b%F{5}] %F{4}%c%F{3}%u%f'
-zstyle ':vcs_info:git*+set-message:*' hooks git-untracked 
+zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 zstyle ':vcs+info:*' enable git
 +vi-git-untracked() {
  if [[ $(git rev-parse --is-inside-wrok-tree 2> /dev/null) == 'true' ]] && [[ $(git ls-files --other --directory --exclude-standard | sed q | wc -l | tr -d ' ') == 1 ]] ;  then hook_com[unstaged]+='%F{1}??%f'
@@ -35,3 +35,9 @@ compinit
 alias ls='ls --color'
 # dotfiles git
 alias dotfiles='/usr/bin/git --git-dir=/home/rurs/.dotfiles/ --work-tree=/home/rurs'
+
+autoload -Uz compinit
+compinit
+# Completion for kitty
+kitty + complete setup zsh | source /dev/stdin
+
