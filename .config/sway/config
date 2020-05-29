@@ -1,148 +1,144 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
+# Config for sway
 # Read `man 5 sway` for a complete reference.
 
-### Variables
-#
-# Logo key. Use Mod1 for Alt.
+## VARIABLES
+
+#Logo key. Use Mod1 for Alt.
 set $mod Mod4
 
-# Home row direction keys, like vim
+# Directions like vim
 #set $left h
 #set $down j
 #set $up k
 #set $right l
 
-# Your preferred terminal emulator
-set $term alacritty
-# Your preferred application launcher
-# Note: pass the final command to swaymsg so that the resulting window can be opened
-# on the original workspace that the command was run on.
-set $menu "rofi -combi-modi drun,run,ssh -show combi -show-icons"
+#set $bg  #fbf1c7
+#set $fg  #3c3837
+#set $hl  #cc241d
+#set $blk #3c3836
+#set $urg #d79921
+#set $nil #000000
 
-### Output configuration
-#
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /home/rurs/Pictures/BlueStar.jpg fill
-#output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
+set $ws1  "一"
+set $ws2  "二"
+set $ws3  "三"
+set $ws4  "四"
+set $ws5  "五"
+set $ws6  "六"
+set $ws7  "七"
+set $ws8  "八"
+set $ws9  "九"
+set $ws10 "十"
 
-### Idle configuration
-#
+set $term kitty
+set $menu "rofi -combi-modi drun,run,ssh -show combi"
+
+## IDLE
  exec swayidle -w \
-          timeout 300 'swaylock -f -c 000000 -i /home/rurs/Pictures/Nebula.jpg' \
+          timeout 300 'swaylock -e -f -c 000000 -i /home/rurs/Pictures/Nebula.jpg' \
           timeout 600 'swaymsg "output * dpms off"' \
                resume 'swaymsg "output * dpms on"' \
-          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
+          before-sleep 'swaylock -e -f -c 000000'
 
-### Input configuration
-#
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
+## OUTPUTS
+output * bg /home/rurs/Pictures/BlueStar.jpg fill
 
-### Key bindings
-#
-# Basics:
-#
-    # Start a terminal
-    bindsym $mod+Return exec $term
+## INPUTS
 
-    # Kill focused window
-    bindsym $mod+Shift+q kill
+###Keybaord Layout
+input * xkb_layout "us,ca"
+input * xkb_variant ",fr"
+input * xkb_options "grp:rctrl_rshift_toggle"
 
-    # Start your launcher
-    bindsym $mod+d exec $menu
+## KEYBINDS
 
-    # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
-    floating_modifier $mod normal
+### LAPTOP HOTKEYS
 
-    # Reload the configuration file
-    bindsym $mod+Shift+c reload
+## Pulse Audio controls
+#increase sound volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 
-    # Lock
-    bindsym $mod+Shift+l exec swaylock -f -c 000000 -i /home/rurs/Pictures/Nebula.jpg
+# Backlight controls via ACPI
+bindsym XF86MonBrightnessDown exec ~/.config/sway/scripts/acpi_brightness.sh down
+bindsym XF86MonBrightnessUp exec ~/.config/sway/scripts/acpi_brightness.sh up
 
-    # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
-#
-# Moving around:
-#
-    # Move your focus around
-    #bindsym $mod+$left focus left
-    #bindsym $mod+$down focus down
-    #bindsym $mod+$up focus up
-    #bindsym $mod+$right focus right
-    # Or use $mod+[up|down|left|right]
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym $mod+Right focus right
+### Basics:
 
-    # Move the focused window with the same, but add Shift
-    #bindsym $mod+Shift+$left move left
-    #bindsym $mod+Shift+$down move down
-    #bindsym $mod+Shift+$up move up
-    #bindsym $mod+Shift+$right move right
-    # Ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
-#
-# Workspaces:
-#
+# Reload the configuration file
+bindsym $mod+Shift+c reload
+# Start a terminal
+bindsym $mod+Return exec $term
+# Kill focused window
+bindsym $mod+Shift+q kill
+# Start your launcher
+bindsym $mod+d exec $menu
+
+### MOUSE
+floating_modifier $mod normal
+focus_follows_mouse yes
+mouse_warping output
+
+### LOCK
+bindsym $mod+Shift+l exec swaylock -e -f -c 000000 -i /home/rurs/Pictures/Nebula.jpg
+
+### EXIT sway (logs you out of your Wayland session)
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+### MOVING
+
+# Move your focus around
+#bindsym $mod+$left focus left
+#bindsym $mod+$down focus down
+#bindsym $mod+$up focus up
+#bindsym $mod+$right focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move the focused window with the same, but add Shift
+#bindsym $mod+Shift+$left move left
+#bindsym $mod+Shift+$down move down
+#bindsym $mod+Shift+$up move up
+#bindsym $mod+Shift+$right move right
+# Ditto, with arrow keys
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+### WORKSPACES
+
     # Switch to workspace
-    bindsym $mod+1 workspace 1
-    bindsym $mod+2 workspace 2
-    bindsym $mod+3 workspace 3
-    bindsym $mod+4 workspace 4
-    bindsym $mod+5 workspace 5
-    bindsym $mod+6 workspace 6
-    bindsym $mod+7 workspace 7
-    bindsym $mod+8 workspace 8
-    bindsym $mod+9 workspace 9
-    bindsym $mod+0 workspace 10
+    bindsym $mod+1 workspace $ws1
+    bindsym $mod+2 workspace $ws2
+    bindsym $mod+3 workspace $ws3
+    bindsym $mod+4 workspace $ws4
+    bindsym $mod+5 workspace $ws5
+    bindsym $mod+6 workspace $ws6
+    bindsym $mod+7 workspace $ws7
+    bindsym $mod+8 workspace $ws8
+    bindsym $mod+9 workspace $ws9
+    bindsym $mod+0 workspace $ws10
     # Move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace 1
-    bindsym $mod+Shift+2 move container to workspace 2
-    bindsym $mod+Shift+3 move container to workspace 3
-    bindsym $mod+Shift+4 move container to workspace 4
-    bindsym $mod+Shift+5 move container to workspace 5
-    bindsym $mod+Shift+6 move container to workspace 6
-    bindsym $mod+Shift+7 move container to workspace 7
-    bindsym $mod+Shift+8 move container to workspace 8
-    bindsym $mod+Shift+9 move container to workspace 9
-    bindsym $mod+Shift+0 move container to workspace 10
+    bindsym $mod+Shift+1 move container to workspace $ws1
+    bindsym $mod+Shift+2 move container to workspace $ws2
+    bindsym $mod+Shift+3 move container to workspace $ws3
+    bindsym $mod+Shift+4 move container to workspace $ws4
+    bindsym $mod+Shift+5 move container to workspace $ws5
+    bindsym $mod+Shift+6 move container to workspace $ws6
+    bindsym $mod+Shift+7 move container to workspace $ws7
+    bindsym $mod+Shift+8 move container to workspace $ws8
+    bindsym $mod+Shift+9 move container to workspace $ws9
+    bindsym $mod+Shift+0 move container to workspace $ws10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
-#
-# Layout stuff:
-#
+
+### LAYOUTS
+
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
@@ -207,11 +203,18 @@ bindsym $mod+r mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
+    pango_markup enabled
     position top
+    #height 25
+    #font pango:DejaVu Sans Mono 11
+    font pango:IPAGothic Regular 12
+    #font pango:Source Han Sans JP 11
+    #font pango:Gohu GohuFont Regular 8
 
     # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
+    #status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
+    #status_command i3blocks
+    status_command ~/.config/sway/scripts/status.sh
 
     colors {
         statusline #ffffff
@@ -223,5 +226,23 @@ bar {
 # Gaps
 gaps inner 8
 
+# border / titlebar
+default_border normal
+hide_edge_borders vertical
+bindsym $mod+Shift+x [class="^.*"] border toggle
+for_window [class="^.*"] border pixel 1
+for_window [class="URxvt"] border normal
+for_window [class="Leafpad"] border normal
+for_window [class="Lxappearance"] border normal
+for_window [app_id="kitty"] border pixel 0
+for_window [app_id="Alacritty"] border pixel 0
+for_window [app_id="imv"] border pixel 0
+for_window [class="vlc"] border pixel 0
+for_window [app_id="mpv"] border pixel 0
+for_window [class="Pcmanfm"] border pixel 0
+for_window [class="Firefox"] border pixel 0
+for_window [class="Geary"] border pixel 0
+for_window [class="Lmms"] border pixel 0
+for_window [class="Feh"] border pixel 0
 
 include /etc/sway/config.d/*
