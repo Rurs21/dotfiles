@@ -7,3 +7,5 @@
 [core]
 	editor = vim
 	excludesfile = /home/rurs/.gitignore
+[commit]
+	gpgsign = true
