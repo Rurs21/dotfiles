@@ -1,7 +1,31 @@
 # .zshrc
+source ~/.antigen/antigen.zsh
+
+antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+antigen apply
+
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+
+ZSH_HIGHLIGHT_STYLES[default]=fg=007
+ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=007
+ZSH_HIGHLIGHT_STYLES[alias]=fg=031,bold
+ZSH_HIGHLIGHT_STYLES[precommand]=fg=003
+ZSH_HIGHLIGHT_STYLES[command]=fg=025
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]=fg=043
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=fg=043
+ZSH_HIGHLIGHT_STYLES[main]=fg=025
+ZSH_HIGHLIGHT_STYLES[arg0]=fg=025
+ZSH_HIGHLIGHT_STYLES[path]=fg=045,underline
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=fg=010
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=fg=010
+ZSH_HIGHLIGHT_PATTERNS=('rm -rf' 'fg=001')
+ZSH_HIGHLIGHT_PATTERNS=('poweroff' 'fg=011')
+ZSH_HIGHLIGHT_PATTERNS=('~' 'fg=162')
 
 # History
-umask 077
 ZDOTDIR=${ZDOTDIR:-${HOME}}
 ZSHDDIR="${HOME}/.config/zsh.d"
 HISTFILE="${ZDOTDIR}/.zsh_history"
@@ -30,16 +54,15 @@ NC='\e[0m'
 
 # Alias
 alias ls='ls --color'
-alias cp='cp -iv'
-alias mv='mv -iv'
-alias rm='rm -iv'
+alias cp='cp -v'
+alias mv='mv -v'
+alias rm='rm -v'
+alias colors='~/Scripts/colors.sh'
 alias dotfiles='/usr/bin/git --git-dir=/home/rurs/.dotfiles/ --work-tree=/home/rurs'
 
 unsetopt beep
 bindkey -e
-# End of lines configured by zsh-newuser-install
 
-# The following lines were added by compinstall
 zstyle :compinstall filename '/home/rurs/.zshrc'
 
 autoload -Uz compinit
@@ -49,7 +72,7 @@ zstyle ':completion:*' completer _expand _complete _ignored _approximate
 zstyle ':completion:*' menu select=7
 zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
 zstyle ':completion::complete:*' use-cache 1
-zstyle ':completion:*:descriptions' format '%B%K{6} %d %k%b'
+#zstyle ':completion:*:descriptions' format '%B%K{6} %d %k%b'
 
 # Features
 setopt extendedGlob
@@ -65,7 +88,7 @@ kitty + complete setup zsh | source /dev/stdin
 
 confirm() {
     local answer
-    echo -ne "zsh: sure you want to run '${YELLOW}$*${NC}' [yN]? "
+    echo -ne "You're sure you want to run ${RED}$* ${NC}? ${yellow}[yN] "
     read -q answer
         echo
     if [[ "${answer}" =~ ^[Yy]$ ]]; then
@@ -89,9 +112,9 @@ confirm_wrapper() {
     confirm ${prefix} "$@"
 }
 
-poweroff() { confirm_wrapper --root $0 "$@"; }
-reboot() { confirm_wrapper --root $0 "$@"; }
-hibernate() { confirm_wrapper --root $0 "$@"; }
+poweroff() { confirm_wrapper $0 "$@"; }
+reboot() { confirm_wrapper $0 "$@"; }
+hibernate() { confirm_wrapper $0 "$@"; }
 
 setup_git_prompt() {
     if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
@@ -142,8 +165,9 @@ precmd() {
 }
 
 #PROMPT
-PROMPT='%F{031}%n%f@%F{070}%m%f %F{080}%(5~|%-1~/.../%3~|%4~)%f ${git_prompt}%f%# '
+PROMPT='%F{070}%n%f@%F{031}%m%f %F{080}%(5~|%-1~/.../%3~|%4~)%f ${git_prompt}%f%# '
 #SPELLING PROMPT
-SPROMPT='%F{197}Do you mean %r ? Nyae! 🐈 %f'
-
+SPROMPT='%F{197}Do you mean %B%r%b ? %F{3}Nyae!%f 🐈 '
+#RIGHT PROMPT
+#RPROMPT='%(?,%F{green}:%),%F{yellow}%? %F{red}:()%f'
 
