@@ -31,18 +31,33 @@ set $ws8  "八"
 set $ws9  "九"
 set $ws10 "十"
 
+set $output1 eDP-1
+set $output2 HDMI-A-1
+
 set $term kitty
 set $menu "rofi -combi-modi drun,run,ssh -show combi"
 
+set $lock 'swaylock -e -f -c 000000 --image=eDP-1:/home/rurs/Pictures/Wallpapers/AsukaLangleySoryu.png'
+set $blurLock 'grim /tmp/lockscreen.png -o eDP-1' \
+'convert /tmp/lockscreen.png -filter Gaussian -blur 0x8 /tmp/lockscreen.png'
+
 ## IDLE
  exec swayidle -w \
-          timeout 300 'swaylock -e -f -c 000000 -i /home/rurs/Pictures/Nebula.jpg' \
+          timeout 300 $lock \
           timeout 600 'swaymsg "output * dpms off"' \
                resume 'swaymsg "output * dpms on"' \
-          before-sleep 'swaylock -e -f -c 000000'
+          before-sleep $lock
 
 ## OUTPUTS
-output * bg /home/rurs/Pictures/BlueStar.jpg fill
+output eDP-1    pos 0    0 res 1920x1080
+output HDMI-A-1 pos 1920 0 res 1680x1050
+
+output eDP-1 bg /home/rurs/Pictures/Wallpapers/BlueStar.jpg fill
+output HDMI-A-1 bg /home/rurs/Pictures/Wallpapers/RndrShape/pink_bg_ver3.png fill
+#oldputs
+#output HDMI-A-1 bg /home/rurs/Pictures/Wallpapers/AsukaLangleySoryu.png fill
+#output HDMI-A-1 bg /home/rurs/Pictures/Wallpapers/RndrShape/1586817827960.jpg fill
+#output HDMI-A-1 bg /home/rurs/Pictures/Wallpapers/RndrShape/pink_bg_ver3.png fill
 
 ## INPUTS
 
@@ -82,7 +97,7 @@ focus_follows_mouse yes
 mouse_warping output
 
 ### LOCK
-bindsym $mod+Shift+l exec swaylock -e -f -c 000000 -i /home/rurs/Pictures/Nebula.jpg
+bindsym $mod+Shift+l exec $lock
 
 ### EXIT sway (logs you out of your Wayland session)
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
@@ -240,6 +255,7 @@ for_window [app_id="imv"] border pixel 0
 for_window [class="vlc"] border pixel 0
 for_window [app_id="mpv"] border pixel 0
 for_window [class="Pcmanfm"] border pixel 0
+for_window [class="code-oss"] border pixel 0
 for_window [class="Firefox"] border pixel 0
 for_window [class="Geary"] border pixel 0
 for_window [class="Lmms"] border pixel 0
