@@ -53,9 +53,11 @@ output HDMI-A-1 bg /home/rurs/Pictures/Wallpapers/RndrShape/pink_bg_ver3.png fil
 ## INPUTS
 
 ###Keybaord Layout
-input * xkb_layout "us,ca"
-input * xkb_variant ",fr"
-input * xkb_options "grp:rctrl_rshift_toggle"
+input type:keyboard {
+    xkb_layout us,ca
+    xkb_variant ,fr
+    xkb_options grp:rctrl_rshift_toggle
+}
 
 ## KEYBINDS
 
