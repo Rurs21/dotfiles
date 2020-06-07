@@ -6,12 +6,6 @@
 #Logo key. Use Mod1 for Alt.
 set $mod Mod4
 
-# Directions like vim
-#set $left h
-#set $down j
-#set $up k
-#set $right l
-
 #set $bg  #fbf1c7
 #set $fg  #3c3837
 #set $hl  #cc241d
@@ -55,9 +49,6 @@ output HDMI-A-1 pos 1920 0 res 1680x1050
 output eDP-1 bg /home/rurs/Pictures/Wallpapers/BlueStar.jpg fill
 output HDMI-A-1 bg /home/rurs/Pictures/Wallpapers/RndrShape/pink_bg_ver3.png fill
 #oldputs
-#output HDMI-A-1 bg /home/rurs/Pictures/Wallpapers/AsukaLangleySoryu.png fill
-#output HDMI-A-1 bg /home/rurs/Pictures/Wallpapers/RndrShape/1586817827960.jpg fill
-#output HDMI-A-1 bg /home/rurs/Pictures/Wallpapers/RndrShape/pink_bg_ver3.png fill
 
 ## INPUTS
 
@@ -93,7 +84,7 @@ bindsym $mod+d exec $menu
 
 ### MOUSE
 floating_modifier $mod normal
-focus_follows_mouse yes
+#focus_follows_mouse yes
 mouse_warping output
 
 ### LOCK
@@ -105,21 +96,12 @@ bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. 
 ### MOVING
 
 # Move your focus around
-#bindsym $mod+$left focus left
-#bindsym $mod+$down focus down
-#bindsym $mod+$up focus up
-#bindsym $mod+$right focus right
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # Move the focused window with the same, but add Shift
-#bindsym $mod+Shift+$left move left
-#bindsym $mod+Shift+$down move down
-#bindsym $mod+Shift+$up move up
-#bindsym $mod+Shift+$right move right
-# Ditto, with arrow keys
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
@@ -226,9 +208,6 @@ bar {
     #font pango:Source Han Sans JP 11
     #font pango:Gohu GohuFont Regular 8
 
-    # When the status_command prints a new line to stdout, swaybar updates.
-    #status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
-    #status_command i3blocks
     status_command ~/.config/sway/scripts/status.sh
 
     colors {
