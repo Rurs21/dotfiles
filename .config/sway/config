@@ -6,14 +6,6 @@
 #Logo key. Use Mod1 for Alt.
 set $mod Mod4
 
-#set $bg  #fbf1c7
-#set $fg  #3c3837
-#set $hl  #cc241d
-#set $blk #3c3836
-#set $urg #d79921
-#set $nil #000000
-
-
 set $ws1  "一"
 set $ws2  "二"
 set $ws3  "三"
@@ -29,7 +21,7 @@ set $output1 eDP-1
 set $output2 HDMI-A-1
 
 set $term kitty
-set $menu "rofi -combi-modi drun,run,ssh -show combi"
+set $menu "wofi"
 
 set $lock 'swaylock -e -f -c 000000 --image=eDP-1:/home/rurs/Pictures/Wallpapers/AsukaLangleySoryu.png'
 set $blurLock 'grim /tmp/lockscreen.png -o eDP-1' \
@@ -225,7 +217,6 @@ gaps inner 8
 # border / titlebar
 default_border normal
 hide_edge_borders vertical
-bindsym $mod+Shift+x [class="^.*"] border toggle
 for_window [class="^.*"] border pixel 1
 for_window [class="URxvt"] border normal
 for_window [class="Leafpad"] border normal

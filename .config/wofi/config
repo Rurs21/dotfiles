@@ -1,0 +1,12 @@
+show=drun
+prompt=Run
+
+width=500
+height=900
+xoffset=1135
+yoffset=15
+
+allow_images=false
+allow_markup=true
+
+term=kitty
