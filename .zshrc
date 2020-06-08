@@ -13,11 +13,11 @@ ZSH_HIGHLIGHT_STYLES[default]=fg=007
 ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=007
 ZSH_HIGHLIGHT_STYLES[alias]=fg=031,bold
 ZSH_HIGHLIGHT_STYLES[precommand]=fg=003
-ZSH_HIGHLIGHT_STYLES[command]=fg=025
+ZSH_HIGHLIGHT_STYLES[command]=fg=031
 ZSH_HIGHLIGHT_STYLES[single-hyphen-option]=fg=043
 ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=fg=043
-ZSH_HIGHLIGHT_STYLES[main]=fg=025
-ZSH_HIGHLIGHT_STYLES[arg0]=fg=025
+ZSH_HIGHLIGHT_STYLES[main]=fg=031
+ZSH_HIGHLIGHT_STYLES[arg0]=fg=031
 ZSH_HIGHLIGHT_STYLES[path]=fg=045,underline
 ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=fg=010
 ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=fg=010
@@ -125,7 +125,7 @@ setup_git_prompt() {
     local git_status_dirty git_branch
 
     if [ "$(git --no-optional-locks status --untracked-files='no' --porcelain)" ]; then
-        git_status_dirty='%F{green}*'
+        git_status_dirty='%F{10}*'
     else
         unset git_status_dirty
     fi
@@ -139,7 +139,7 @@ setup_git_prompt() {
 
     git_branch="${git_branch:-no branch}"
 
-    git_prompt="%F{9}[%F{15}${git_branch}${git_status_dirty}%F{9}]"
+    git_prompt="%F{008}[%F{003}%B${git_branch}${git_status_dirty}%b%F{008}]"
 }
 
 dot_progress() {
@@ -165,7 +165,7 @@ precmd() {
 }
 
 #PROMPT
-PROMPT='%F{070}%n%f@%F{031}%m%f %F{080}%(5~|%-1~/.../%3~|%4~)%f ${git_prompt}%f%# '
+PROMPT='%F{070}%n%f@%F{025}%m%f %F{080}%(5~|%-1~/.../%3~|%4~)%f ${git_prompt}%f%# '
 #SPELLING PROMPT
 SPROMPT='%F{197}Do you mean %B%r%b ? %F{3}Nyae!%f 🐈 '
 #RIGHT PROMPT
