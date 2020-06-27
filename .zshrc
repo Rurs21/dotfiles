@@ -59,6 +59,7 @@ alias mv='mv -v'
 alias rm='rm -v'
 alias colors='~/Scripts/colors.sh'
 alias dotfiles='/usr/bin/git --git-dir=/home/rurs/.dotfiles/ --work-tree=/home/rurs'
+alias npm='nocorrect npm'
 
 unsetopt beep
 bindkey -e
