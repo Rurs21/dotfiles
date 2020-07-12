@@ -9,3 +9,5 @@
 	excludesfile = /home/rurs/.gitignore
 [commit]
 	gpgsign = true
+[pull]
+	ff = only
