@@ -168,7 +168,7 @@ precmd() {
 #PROMPT
 PROMPT='%F{070}%n%f@%F{025}%m%f %F{080}%(5~|%-1~/.../%3~|%4~)%f ${git_prompt}%f%# '
 #SPELLING PROMPT
-SPROMPT='%F{197}Do you mean %B%r%b ? %F{3}Nyae!%f 🐈 '
+SPROMPT='%F{197}Do you mean %B%r%b ? %F{3}Nyae!%f 🐱 '
 #RIGHT PROMPT
 #RPROMPT='%(?,%F{green}:%),%F{yellow}%? %F{red}:()%f'
 
