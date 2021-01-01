@@ -11,3 +11,6 @@
 	gpgsign = true
 [pull]
 	ff = only
+[alias]
+	fuck = reset HEAD~1 --soft
+        yeet = !git add . && git commit -m "YEET!" && git push -f
