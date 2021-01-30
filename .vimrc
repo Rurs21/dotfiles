@@ -5,7 +5,7 @@ filetype plugin on
 filetype indent on
 
 " set the runtime path to include Vundle and initialize
-set rtp+=/home/rurs/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
     Plugin 'VundleVim/Vundle.vim'
     Plugin 'preservim/nerdtree'

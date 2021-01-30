@@ -1,16 +1,16 @@
 [user]
-	name = Rurs21
-	email = charles-emile96@hotmail.com
-	signingkey = E69A261857D7D3A7
+        name = Rurs21
+        email = charles-emile96@hotmail.com
+        signingkey = E69A261857D7D3A7
 [color]
-	ui = true
+        ui = true
 [core]
-	editor = vim
-	excludesfile = /home/rurs/.gitignore
+        editor = vim
+        excludesfile = ~/.gitignore
 [commit]
-	gpgsign = true
+        gpgsign = true
 [pull]
-	ff = only
+        ff = only
 [alias]
-	fuck = reset HEAD~1 --soft
+        fuck = reset HEAD~1 --soft
         yeet = !git add . && git commit -m "YEET!" && git push -f

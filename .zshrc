@@ -58,22 +58,12 @@ alias cp='cp -v'
 alias mv='mv -v'
 alias rm='rm -v'
 alias colors='~/Scripts/colors.sh'
-alias dotfiles='/usr/bin/git --git-dir=/home/rurs/.dotfiles/ --work-tree=/home/rurs'
+alias dotfiles='/usr/bin/git --git-dir=${HOME}/.dotfiles/ --work-tree=${HOME}'
 alias npm='nocorrect npm'
 
 unsetopt beep
 bindkey -e
 
-zstyle :compinstall filename '/home/rurs/.zshrc'
-
-autoload -Uz compinit
-compinit
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-zstyle ':completion:*' completer _expand _complete _ignored _approximate
-zstyle ':completion:*' menu select=7
-zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
-zstyle ':completion::complete:*' use-cache 1
-#zstyle ':completion:*:descriptions' format '%B%K{6} %d %k%b'
 
 # Features
 setopt extendedGlob
@@ -83,7 +73,16 @@ setopt correct
 autoload -U zmv
 autoload -Uz vcs_info
 autoload -Uz compinit
-compinit
+compinit -i
+
+zstyle :compinstall filename '${HOME}/.zshrc'
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' completer _expand _complete _ignored _approximate
+zstyle ':completion:*' menu select=7
+zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
+zstyle ':completion::complete:*' use-cache 1
+#zstyle ':completion:*:descriptions' format '%B%K{6} %d %k%b'
+
 # Completion for kitty
 kitty + complete setup zsh | source /dev/stdin
 
@@ -141,24 +140,6 @@ setup_git_prompt() {
     git_branch="${git_branch:-no branch}"
 
     git_prompt="%F{008}[%F{003}%B${git_branch}${git_status_dirty}%b%F{008}]"
-}
-
-dot_progress() {
-    # Fancy progress function from Landley's Aboriginal Linux.
-    # Useful for long rm, tar and such.
-    # Usage:
-    #     rm -rfv /foo | dot_progress
-    local i='0'
-    local line=''
-
-    while read line; do
-        i="$((i+1))"
-        if [ "${i}" = '25' ]; then
-            printf '.'
-            i='0'
-        fi
-    done
-    printf '\n'
 }
 
 precmd() {
