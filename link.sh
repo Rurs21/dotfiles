@@ -9,7 +9,8 @@ is_hidden() {
 # Recursion link
 # $1=src $2=dest
 relink() {
-    for file in $1/{*,.[^.],.??*}; do
+    # Include hidden files and Exclude files starting with _
+    for file in $1/{[^_],.[^.],..?}*; do
         if [ -f $file ]; then
             ln -sf $FILE $2
         elif [ -d $file ]; then
@@ -24,4 +25,7 @@ relink() {
     done
 }
 
-relink $(pwd -P)/configs $HOME
+config_dir=$(pwd -P)/configs
+
+relink $config_dir $HOME
+relink $config_dir/_$(uname) $HOME
