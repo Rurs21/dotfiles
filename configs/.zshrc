@@ -31,11 +31,14 @@ ZSHDDIR="${HOME}/.config/zsh.d"
 HISTFILE="${ZDOTDIR}/.zsh_history"
 HISTSIZE='10000'
 SAVEHIST="${HISTSIZE}"
+
+export SHELLRC"$HOME/.zshrc"
 export EDITOR="/usr/bin/vim"
 export TMP="$HOME/tmp"
 export TEMP="$TMP"
 export TMPDIR="$TMP"
 export TMPPREFIX="${TMPDIR}/zsh"
+export GPG_TTY=$(tty)
 
 # Colors.
 red='\e[0;31m'
@@ -63,7 +66,6 @@ alias npm='nocorrect npm'
 
 unsetopt beep
 bindkey -e
-
 
 # Features
 setopt extendedGlob
