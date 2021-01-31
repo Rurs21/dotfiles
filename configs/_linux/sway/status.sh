@@ -50,7 +50,7 @@ function print_status {
     #private_ip=$(hostname -i)
     interface=$(ip route get 1.1.1.1 | grep -Po '(?<=dev\s)\w+' | cut -f1 -d ' ')
     # interface_easyname grabs the "old" interface name before systemd renamed it
-    interface_easyname=$(dmesg | grep $network | grep renamed | awk 'NF>1{print $NF}')
+    #interface_easyname=$(dmesg | grep $network | grep renamed | awk 'NF>1{print $NF}')
     net_stat=$(ip -br link | grep $interface | awk '{print $2}')
 
     if [ -z "$net_stat" ]; then
