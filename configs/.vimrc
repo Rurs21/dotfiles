@@ -1,8 +1,6 @@
 set nocompatible
 
-filetype on
-filetype plugin on
-filetype indent on
+filetype off
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -26,6 +24,8 @@ call vundle#begin()
 
     "Plugin 'Valloric/YouCompleteMe'
 call vundle#end()            " required
+
+filetype plugin indent on
 
 syntax on
 set number
