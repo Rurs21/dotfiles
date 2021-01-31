@@ -1,12 +1,16 @@
 show=drun
 prompt=Run
 
-width=500
-height=900
-xoffset=1135
-yoffset=15
+width=300
+height=550
+xoffset=0
+yoffset=0
 
-allow_images=false
+content_halig=fill
+
+allow_images=true
 allow_markup=true
+
+image_size=24
 
 term=kitty
