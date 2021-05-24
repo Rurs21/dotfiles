@@ -16,3 +16,5 @@
         yeet = !git add . && git commit -m "YEET!" && git push -f
 [gpg]
 	program = /usr/local/bin/gpg
+[init]
+	defaultBranch = main
