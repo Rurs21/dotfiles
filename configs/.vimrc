@@ -47,5 +47,6 @@ autocmd ColorScheme * highlight TabLineSel ctermbg=NONE guibg=NONE
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 
 autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
+autocmd FileType c set shiftwidth=8
 
 let &t_ut=''
