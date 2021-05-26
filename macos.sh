@@ -89,14 +89,14 @@ sudo pmset -a sms 0
 
 # Keyboard and inputs
 
-# Disable smart quotes and dashes as they’re annoying when typing code
+# Disable smart quotes and dashes
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 
-# Disable automatic capitalization as it’s annoying when typing code
+# Disable automatic capitalization
 defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
 
-# Disable automatic period substitution as it’s annoying when typing code
+# Disable automatic period substitution
 defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 
 # Automatically illuminate built-in MacBook keyboard in low light
@@ -178,7 +178,7 @@ defaults write com.apple.finder ShowPathbar -bool false
 # Finder: hide status bar
 defaults write com.apple.finder ShowStatusBar -bool false
 
-# Show icons for hard drives, servers, and removable media on the desktop
+# Hide icons for hard drives, servers, and removable media on the desktop
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool false
 defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
 defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
@@ -332,7 +332,7 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 # Disable automatic emoji substitution (i.e. use plain text smileys)
 defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticEmojiSubstitutionEnablediMessage" -bool false
 
-# Disable smart quotes as it’s annoying for messages that contain code
+# Disable smart quotes
 defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticQuoteSubstitutionEnabled" -bool false
 
 # Restart affected applications
