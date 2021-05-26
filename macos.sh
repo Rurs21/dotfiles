@@ -217,8 +217,8 @@ defaults write com.apple.terminal "Default Window Settings" -string "Pro"
 defaults write com.apple.terminal "Startup Window Settings" -string "Pro"
 defaults write com.apple.Terminal ShowLineMarks -int 0
 
-# Always show scrollbars
-defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
+# Show scrollbars when necessary
+defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
 
 
 # Activity Monitor
