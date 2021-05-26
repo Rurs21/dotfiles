@@ -32,7 +32,7 @@ HISTFILE="${ZDOTDIR}/.zsh_history"
 HISTSIZE='10000'
 SAVEHIST="${HISTSIZE}"
 
-export SHELLRC"$HOME/.zshrc"
+export SHELLRC="$HOME/.zshrc"
 export EDITOR="/usr/bin/vim"
 export TMP="$HOME/tmp"
 export TEMP="$TMP"
