@@ -40,3 +40,15 @@ if [ $(uname) = Darwin ]; then
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebew/install/master/install.sh)" || echo_fatal
     fi
 fi
+
+if [ ! -e ~/.vim/autoload/plug.vim ]; then
+    echo_running "Installing vim-plug..."
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    echo_ok
+fi
+
+if [ ! -e ~/.antigen/antigen.zsh ]; then
+   echo_running "Installing antigen..."
+   curl -fLo ~/.antigen/antigen.zsh --create-dirs git.io/antigen
+fi
