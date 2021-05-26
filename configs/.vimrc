@@ -1,31 +1,19 @@
 set nocompatible
 
-filetype off
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-    Plugin 'VundleVim/Vundle.vim'
-    Plugin 'preservim/nerdtree'
+call plug#begin('~/.vim/plugged')
+    Plug 'preservim/nerdtree'
     map <C-n> :NERDTreeToggle<CR>
-    Plugin 'Xuyuanp/nerdtree-git-plugin'
+    Plug 'Xuyuanp/nerdtree-git-plugin'
 
-    Plugin 'vim-airline/vim-airline'
-    Plugin 'vim-airline/vim-airline-themes'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
     let g:airline_theme='term'
 
+    Plug 'octol/vim-cpp-enhanced-highlight'
     let g:cpp_class_scope_highlight = 1
     let g:cpp_class_decl_highlight = 1
     let g:cpp_member_variable_highlight = 1
-    Plugin 'octol/vim-cpp-enhanced-highlight'
-
-    "Plugin 'jaxbot/semantic-highlight.vim'
-    "let g:semanticTermColors = [28,1,2,3,38,117,31,7,25,9,10,34,45,13,14,15,3,197,124,19]
-
-    "Plugin 'Valloric/YouCompleteMe'
-call vundle#end()            " required
-
-filetype plugin indent on
+call plug#end()
 
 syntax on
 set number
