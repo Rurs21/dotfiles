@@ -7,11 +7,11 @@ COL_GREEN=$ESC_SEQ"32;01m"
 COL_YELLOW=$ESC_SEQ"33;01m"
 
 echo_ok() {
-    printf '%b\n' "$COL_GREEN[ok]$COL_RESET "$1
+    printf '%b\n' "$COL_GREEN[ok]$COL_RESET $1"
 }
 
 echo_running() {
-    printf '%b' "$COL_YELLOW ⇒ $COL_RESET"$1" "
+    printf '%b\n' "$COL_YELLOW ⇒ $COL_RESET $1"
 }
 
 echo_fatal() {
@@ -23,9 +23,11 @@ is_installed() {
 }
 
 if [ $(uname) = Darwin ]; then
-    echo_running "Installing xcode tools..."
-    xcode-select --install
-    echo_ok
+    if [ ! -e /Library/Developer/CommandLineTools/usr/bin/git ]; then
+        echo_running "Installing xcode tools..."
+        xcode-select --install
+        echo_ok
+    fi
     echo_running "Installing updates..."
     sudo softwareupdate -i -a
     echo_ok
