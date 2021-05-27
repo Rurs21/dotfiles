@@ -1,11 +1,5 @@
 #!/bin/sh
 
-is_hidden() {
-    fchar=`basename $1 | cut -c1`
-    test $fchar = "."
-    return $?
-}
-
 # Recursion link
 # $1=src $2=dest
 relink() {
@@ -16,7 +10,8 @@ relink() {
         elif [ -d $file ]; then
             dir=`basename $file`
             dest=$2/$dir
-            if ! is_hidden $dir && [ ${2#*'.'} == $2 ]; then
+            #  Add to .config if no hidden parent dir
+            if [ ${dir:0:1} != "." ] && [ ${2#*'.'} == $2 ]; then
                 dest=$2/.config/$dir
             fi
             mkdir -p $dest
