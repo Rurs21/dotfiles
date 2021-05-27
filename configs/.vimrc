@@ -23,7 +23,7 @@ set encoding=utf-8
 set modifiable
 
 let g:rehash256 = 1
-colorscheme monokaii
+colorscheme molokai
 "set termguicolors
 autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
 autocmd ColorScheme * highlight LineNr ctermbg=NONE guibg=NONE
