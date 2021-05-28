@@ -56,13 +56,13 @@ CYAN='\e[1;36m'
 NC='\e[0m'
 
 # Alias
-alias ls='ls --color'
 alias cp='cp -v'
 alias mv='mv -v'
 alias rm='rm -v'
+alias cc='clang -Wall -O -std=c17'
 alias colors='~/Scripts/colors.sh'
-alias dotfiles='/usr/bin/git --git-dir=${HOME}/.dotfiles/ --work-tree=${HOME}'
 alias npm='nocorrect npm'
+source ~/.aliases
 
 unsetopt beep
 bindkey -e

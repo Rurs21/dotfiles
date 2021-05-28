@@ -1,3 +1,6 @@
+#!/bin/zsh
+
+alias ls='ls --color'
 ## Wayland workaround
 alias obs='QT_QPA_PLATFORM=xcb obs'
 alias rstudio='QT_QPA_PLATFORM=xcb rstudio-bin'

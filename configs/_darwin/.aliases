@@ -1,0 +1,6 @@
+#!/bin/zsh
+# macOS specifc aliases
+
+alias ls='ls -G'
+## If iPhone constantly toggle between connect & disconnect
+alias fixusb='sudo killall -STOP -c usbd'
