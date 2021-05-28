@@ -1,14 +1,14 @@
 # .zshrc
-source ~/.antigen/antigen.zsh
 
+# Antigen
+source ~/.antigen/antigen.zsh
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
-
 antigen apply
 
+# Highligth
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
-
 ZSH_HIGHLIGHT_STYLES[default]=fg=007
 ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=007
 ZSH_HIGHLIGHT_STYLES[alias]=fg=031,bold
@@ -32,6 +32,7 @@ HISTFILE="${ZDOTDIR}/.zsh_history"
 HISTSIZE='10000'
 SAVEHIST="${HISTSIZE}"
 
+# Variables
 export SHELLRC="$HOME/.zshrc"
 export EDITOR="/usr/bin/vim"
 export TMP="$HOME/tmp"
@@ -88,6 +89,7 @@ zstyle ':completion::complete:*' use-cache 1
 # Completion for kitty
 kitty + complete setup zsh | source /dev/stdin
 
+# Confirm functions
 confirm() {
     local answer
     echo -ne "You're sure you want to run ${RED}$* ${NC}? ${yellow}[yN] "
@@ -118,6 +120,7 @@ poweroff() { confirm_wrapper $0 "$@"; }
 reboot() { confirm_wrapper $0 "$@"; }
 hibernate() { confirm_wrapper $0 "$@"; }
 
+# Git prompt
 setup_git_prompt() {
     if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
         unset git_prompt
@@ -148,7 +151,7 @@ precmd() {
     setup_git_prompt
 }
 
-#PROMPT
+# Prompt
 PROMPT='%F{070}%n%f@%F{025}%m%f %F{080}%(5~|%-1~/.../%3~|%4~)%f ${git_prompt}%f%# '
 #SPELLING PROMPT
 SPROMPT='%F{197}Do you mean %B%r%b ? %F{3}Nyae!%f 🐱 '
