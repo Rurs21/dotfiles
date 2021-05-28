@@ -22,16 +22,16 @@ unset COMPUTER_NAME
 defaults write NSGlobalDomain AppleInterfaceStyle "Dark"
 
 # Hide menu bar
-#defaults write NSGlobalDomain _HIHideMenuBar -bool true
+defaults write NSGlobalDomain _HIHideMenuBar -bool false
 
-# Remove annoying accents menu
-defaults write -g ApplePressAndHoldEnabled -bool false
+# Accents menu
+defaults write -g ApplePressAndHoldEnabled -bool true
 
 # Show file extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
-# Use fahrenheit
-#defaults write NSGlobalDomain AppleTemperatureUnit "Fahrenheit"
+# Temperature Unit [Celsius, Kelvin, Fahrenheit]
+defaults write NSGlobalDomain AppleTemperatureUnit "Celsius"
 
 # Language
 defaults write NSGlobalDomain AppleLanguages -array "en"
@@ -50,13 +50,13 @@ sudo systemsetup -settimezone "America/Montreal" > /dev/null
 #dockutil --no-restart --add "$HOME/Downloads" --view fan --display stack --sort dateadded
 
 # Set the icon size of Dock items to 62 pixels
-#defaults write com.apple.dock tilesize -int 62
+defaults write com.apple.dock tilesize -int 62
 
-# Delete recent items from dock
-#defaults write com.apple.dock recent-apps -bool false
+# Dock recent apps
+defaults write com.apple.dock recent-apps -bool true
 
 # Disable audio feedback when volume is changed
-#defaults write com.apple.sound.beep.feedback -bool false
+defaults write com.apple.sound.beep.feedback -bool false
 
 # Menu bar: show battery percentage
 defaults write com.apple.menuextra.battery ShowPercent YES
@@ -136,7 +136,7 @@ defaults write NSGlobalDomain AppleFontSmoothing -int 2
 defaults write com.apple.finder AppleShowAllFiles -bool true
 
 # Display full POSIX path as Finder window title
-defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool false
 
 # Keep folders on top when sorting by name
 defaults write com.apple.finder _FXSortFoldersFirst -bool true
@@ -152,7 +152,7 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
 # Use AirDrop over every interface.
-defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
+defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool false
 
 # Show indicator lights for open applications in the Dock
 defaults write com.apple.dock show-process-indicators -bool true
@@ -256,9 +256,6 @@ defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -bool true
 
 # Turn on app auto-update
 defaults write com.apple.commerce AutoUpdate -bool true
-
-# Automatically download apps purchased on other Macs
-defaults write com.apple.SoftwareUpdate ConfigDataInstall -int 1
 
 
 # Safari
