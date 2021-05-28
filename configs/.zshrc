@@ -65,19 +65,21 @@ alias colors='~/Scripts/colors.sh'
 alias npm='nocorrect npm'
 source ~/.aliases
 
-unsetopt beep
+# Zsh Line Editor [-e emac | -v  vi]
 bindkey -e
-
-# Features
-setopt extendedGlob
-setopt prompt_subst
-setopt correct
 
 autoload -U zmv
 autoload -Uz vcs_info
 autoload -Uz compinit
 compinit -i
 
+# Features
+unsetopt beep
+setopt extendedGlob
+setopt prompt_subst
+setopt correct
+
+# Completion
 zstyle :compinstall filename '${HOME}/.zshrc'
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' completer _expand _complete _ignored _approximate
@@ -86,11 +88,24 @@ zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %
 zstyle ':completion::complete:*' use-cache 1
 #zstyle ':completion:*:descriptions' format '%B%K{6} %d %k%b'
 
-# Completion for kitty
-kitty + complete setup zsh | source /dev/stdin
+# Git Prompt
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' stagedstr   '%F{10}!'
+zstyle ':vcs_info:*' unstagedstr '%F{01}?'
+zstyle ':vcs_info:git:*' formats '%F{008}[%F{003}%B%b%%b%u%c%F{008}]%f'
 
-# Confirm functions
-confirm() {
+# Prompt
+PROMPT='%F{070}%n%f@%F{025}%m %F{080}%(5~|%-1~/.../%3~|%4~) ${vcs_info_msg_0_}%# '
+# Spelling prompt
+SPROMPT='%F{197}Do you mean %B%r%b ? %F{3}Nyae!%f 🐱 '
+# Right prompt
+#RPROMPT='%(?,%F{green}:%),%F{yellow}%? %F{red}:()%f'
+
+function precmd() { vcs_info }
+
+# Misc. Functions
+function confirm() {
     local answer
     echo -ne "You're sure you want to run ${RED}$* ${NC}? ${yellow}[yN] "
     read -q answer
@@ -102,7 +117,7 @@ confirm() {
     fi
 }
 
-confirm_wrapper() {
+function confirm_wrapper() {
     if [ "$1" = '--root' ]; then
         local as_root='true'
         shift
@@ -119,42 +134,3 @@ confirm_wrapper() {
 poweroff() { confirm_wrapper $0 "$@"; }
 reboot() { confirm_wrapper $0 "$@"; }
 hibernate() { confirm_wrapper $0 "$@"; }
-
-# Git prompt
-setup_git_prompt() {
-    if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-        unset git_prompt
-        return 0
-    fi
-
-    local git_status_dirty git_branch
-
-    if [ "$(git --no-optional-locks status --untracked-files='no' --porcelain)" ]; then
-        git_status_dirty='%F{10}*'
-    else
-        unset git_status_dirty
-    fi
-
-    git_branch="$(git symbolic-ref HEAD 2>/dev/null)"
-    git_branch="${git_branch#refs/heads/}"
-
-    if [ "${#git_branch}" -ge 24 ]; then
-        git_branch="${git_branch:0:21}..."
-    fi
-
-    git_branch="${git_branch:-no branch}"
-
-    git_prompt="%F{008}[%F{003}%B${git_branch}${git_status_dirty}%b%F{008}]"
-}
-
-precmd() {
-    setup_git_prompt
-}
-
-# Prompt
-PROMPT='%F{070}%n%f@%F{025}%m%f %F{080}%(5~|%-1~/.../%3~|%4~)%f ${git_prompt}%f%# '
-#SPELLING PROMPT
-SPROMPT='%F{197}Do you mean %B%r%b ? %F{3}Nyae!%f 🐱 '
-#RIGHT PROMPT
-#RPROMPT='%(?,%F{green}:%),%F{yellow}%? %F{red}:()%f'
-
