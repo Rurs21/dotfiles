@@ -1,0 +1,23 @@
+fn - e : yabai -m space --layout bsp
+fn - s : yabai -m space --layout stack1
+
+fn - down : yabai -m window --focus stack.next || yabai -m window --focus south
+fn - up : yabai -m window --focus stack.prev || yabai -m window --focus north
+fn + alt - left : yabai -m window --focus west
+fn + alt - right : yabai -m window --focus east
+
+ctrl - 1 : yabai -m space --focus 1
+ctrl - 2 : yabai -m space --focus 2
+ctrl - 3 : yabai -m space --focus 3
+ctrl - 4 : yabai -m space --focus 4
+ctrl - 5 : yabai -m space --focus 5
+ctrl - 6 : yabai -m space --focus 6
+
+cmd + shift - 1 : yabai -m window --space 1
+cmd + shift - 2 : yabai -m window --space 2
+cmd + shift - 3 : yabai -m window --space 3
+cmd + shift - 4 : yabai -m window --space 4
+cmd + shift - 5 : yabai -m window --space 5
+cmd + shift - 6 : yabai -m window --space 6
+
+fn - f : yabai -m window --toggle float
