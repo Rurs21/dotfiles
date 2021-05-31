@@ -7,6 +7,8 @@
 [core]
         editor = vim
         excludesfile = ~/.gitignore
+[gpg]
+	program = /usr/local/bin/gpg
 [commit]
         gpgsign = true
 [pull]
@@ -14,7 +16,6 @@
 [alias]
         fuck = reset HEAD~1 --soft
         yeet = !git add . && git commit -m "YEET!" && git push -f
-[gpg]
-	program = /usr/local/bin/gpg
+        scrap = !sh -c \"git checkout HEAD -- $1\" -
 [init]
 	defaultBranch = main
