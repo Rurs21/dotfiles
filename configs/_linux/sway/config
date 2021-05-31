@@ -23,8 +23,8 @@ set $output2 HDMI-A-1
 set $term kitty
 set $menu "wofi"
 
-set $lock 'swaylock -e -f -c 000000 --image=eDP-1:/home/rurs/Pictures/Wallpapers/AsukaLangleySoryu.png'
-set $blurLock 'grim /tmp/lockscreen.png -o eDP-1' \
+set $lock 'swaylock -e -f -c 000000 --image=$output1:~/Pictures/Wallpapers/AsukaLangleySoryu.png'
+set $blurLock 'grim /tmp/lockscreen.png -o $output1' \
 'convert /tmp/lockscreen.png -filter Gaussian -blur 0x8 /tmp/lockscreen.png'
 
 ## IDLE
@@ -35,12 +35,11 @@ set $blurLock 'grim /tmp/lockscreen.png -o eDP-1' \
           before-sleep $lock
 
 ## OUTPUTS
-output eDP-1    pos 0    0 res 1920x1080
-output HDMI-A-1 pos 1920 0 res 1680x1050
+output $output1 pos 0    0 res 1920x1080
+output $output2 pos 1920 0 res 1920x1080
 
-output eDP-1 bg /home/rurs/Pictures/Wallpapers/BlueStar.jpg fill
-output HDMI-A-1 bg /home/rurs/Pictures/Wallpapers/RndrShape/pink_bg_ver3.png fill
-#oldputs
+output $output1 bg ~/Pictures/Wallpapers/1604959017464.jpg fill
+output $output2 bg ~/Pictures/Wallpapers/1604959017464.jpg fill
 
 ## INPUTS
 
@@ -81,7 +80,7 @@ bindsym $mod+d exec $menu
 
 ### MOUSE
 floating_modifier $mod normal
-#focus_follows_mouse yes
+focus_follows_mouse no
 mouse_warping output
 
 ### LOCK
@@ -129,7 +128,6 @@ bindsym $mod+Shift+Right move right
     bindsym $mod+Shift+9 move container to workspace $ws9
     bindsym $mod+Shift+0 move container to workspace $ws10
     # Note: workspaces can have any name you want, not just numbers.
-    # We just use 1-10 as the default.
 
 ### LAYOUTS
 
@@ -175,12 +173,6 @@ mode "resize" {
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
-    #bindsym $left resize shrink width 10px
-    #bindsym $down resize grow height 10px
-    #bindsym $up resize shrink height 10px
-    #bindsym $right resize grow width 10px
-
-    # Ditto, with arrow keys
     bindsym Left resize shrink width 10px
     bindsym Down resize grow height 10px
     bindsym Up resize shrink height 10px
@@ -200,10 +192,7 @@ bar {
     pango_markup enabled
     position top
     #height 25
-    #font pango:DejaVu Sans Mono 11
     font pango:IPAGothic Regular 12
-    #font pango:Source Han Sans JP 11
-    #font pango:Gohu GohuFont Regular 8
 
     status_command ~/.config/sway/status.sh
 
