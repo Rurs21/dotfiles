@@ -14,8 +14,8 @@ ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=007
 ZSH_HIGHLIGHT_STYLES[alias]=fg=031,bold
 ZSH_HIGHLIGHT_STYLES[precommand]=fg=003
 ZSH_HIGHLIGHT_STYLES[command]=fg=031
-ZSH_HIGHLIGHT_STYLES[single-hyphen-option]=fg=043
-ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=fg=043
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]=fg=170
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=fg=170
 ZSH_HIGHLIGHT_STYLES[main]=fg=031
 ZSH_HIGHLIGHT_STYLES[arg0]=fg=031
 ZSH_HIGHLIGHT_STYLES[path]=fg=045,underline
@@ -95,14 +95,29 @@ zstyle ':vcs_info:*' stagedstr   '%F{10}!'
 zstyle ':vcs_info:*' unstagedstr '%F{01}?'
 zstyle ':vcs_info:git:*' formats '%F{008}[%F{003}%B%b%%b%u%c%F{008}]%f'
 
+
 # Prompt
-PROMPT='%F{070}%n%f@%F{025}%m %F{080}%(5~|%-1~/.../%3~|%4~) ${vcs_info_msg_0_}%# '
+user_info="%F{070}%n%f@%F{025}%m"
+working_dir="%F{042}%(4~|%-1~/.../%1~|%~)%f"
+PROMPT='${user_info} ${working_dir} %# '
 # Spelling prompt
 SPROMPT='%F{197}Do you mean %B%r%b ? %F{3}Nyae!%f 🐱 '
 # Right prompt
 #RPROMPT='%(?,%F{green}:%),%F{yellow}%? %F{red}:()%f'
 
-function precmd() { vcs_info }
+function precmd() {
+    vcs_info
+
+    if [[ -z ${vcs_info_msg_0_} ]]; then
+        PROMPT='${user_info} ${working_dir} %# '
+    else
+        # show git repo relative path
+        git_toplv="$(basename $(git rev-parse --show-toplevel))"
+        git_prefix="$(git rev-parse --show-prefix)"; git_prefix=${git_prefix%?}
+        git_working_dir="%F{077}${git_toplv}${git_prefix:+"/$git_prefix"}%f"
+        PROMPT='${user_info} ${git_working_dir} ${vcs_info_msg_0_}%# '
+    fi
+}
 
 # Misc. Functions
 function confirm() {
