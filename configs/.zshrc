@@ -99,7 +99,7 @@ zstyle ':vcs_info:git:*' formats '%F{008}[%F{003}%B%b%%b%u%c%F{008}]%f'
 
 # Prompt
 user_info="%F{070}%n%f@%F{025}%m"
-working_dir="%F{042}%(4~|%-1~/.../%1~|%~)%f"
+working_dir="%F{036}%(4~|%-1~/.../%1~|%~)%f"
 PROMPT='${user_info} ${working_dir} %# '
 # Spelling prompt
 SPROMPT='%F{197}Do you mean %B%r%b ? %F{3}Nyae!%f 🐱 '
@@ -115,7 +115,7 @@ function precmd() {
         # show git repo relative path
         git_toplv="$(basename $(git rev-parse --show-toplevel))"
         git_prefix="$(git rev-parse --show-prefix)"; git_prefix=${git_prefix%?}
-        git_working_dir="%F{077}${git_toplv}${git_prefix:+"/$git_prefix"}%f"
+        git_working_dir="%F{041}${git_toplv}${git_prefix:+"/$git_prefix"}%f"
         PROMPT='${user_info} ${git_working_dir} ${vcs_info_msg_0_}%# '
     fi
 }
