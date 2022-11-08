@@ -1,11 +1,27 @@
 # .zshrc
 
-# Antigen
-source ~/.antigen/antigen.zsh
-antigen bundle zsh-users/zsh-completions
-antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen apply
+# Antidote
+antidote_dir=${ZDOTDIR:-~}/.antidote
+plugins_txt=${ZDOTDIR:-~}/.zsh_plugins.txt
+static_file=${ZDOTDIR:-~}/.zsh_plugins.zsh
+
+# Clone antidote if necessary and generate a static plugin file.
+if [[ ! $static_file -nt $plugins_txt ]]; then
+  [[ -e $antidote_dir ]] ||
+    git clone --depth=1 https://github.com/mattmc3/antidote.git $antidote_dir
+  (
+    source $antidote_dir/antidote.zsh
+    [[ -e $plugins_txt ]] || touch $plugins_txt
+    antidote bundle <$plugins_txt >$static_file
+  )
+fi
+
+autoload -Uz $antidote_dir/functions/antidote
+
+source $static_file
+
+# cleanup
+unset antidote_dir plugins_txt static_file
 
 typeset -gA ZSH_HIGHLIGHT_STYLES
 # Highligth
