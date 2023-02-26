@@ -13,6 +13,18 @@ call plug#begin('~/.vim/plugged')
     let g:cpp_class_scope_highlight = 1
     let g:cpp_class_decl_highlight = 1
     let g:cpp_member_variable_highlight = 1
+
+    Plug 'rust-lang/rust.vim'
+
+    Plug 'dense-analysis/ale'
+    let g:ale_linters = {
+        \ 'rust': ['analyzer'],
+        \}
+    let g:ale_fixers = {
+        \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+        \ 'rust': ['RustFmt']
+        \}
+
 call plug#end()
 
 syntax on
@@ -31,6 +43,7 @@ autocmd ColorScheme * highlight NonText ctermbg=NONE guibg=NONE
 autocmd ColorScheme * highlight TabLine ctermbg=NONE guibg=NONE
 autocmd ColorScheme * highlight TabLineFill ctermbg=NONE guibg=NONE
 autocmd ColorScheme * highlight TabLineSel ctermbg=NONE guibg=NONE
+highlight Normal ctermbg=NONE
 
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 
