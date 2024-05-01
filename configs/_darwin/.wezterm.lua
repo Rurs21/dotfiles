@@ -15,25 +15,15 @@ end
 local hour = tonumber(os.date("%H"))
 
 if hour >= 6 and hour < 18 then
-    config.color_scheme = '3024 Day'
+    config.color_scheme = 'Catppuccin Latte'
 else
-    config.color_scheme = '3024 Night'
+    config.color_scheme = 'Elementary' 
 end
-
-config.colors = {
-  -- Make the selection text color fully transparent.
-  -- When fully transparent, the current text color will be used.
-  selection_fg = 'none',
-  -- Set the selection background color with alpha.
-  -- When selection_bg is transparent, it will be alpha blended over
-  -- the current cell background color, rather than replace it
-  selection_bg = 'rgba(50% 50% 50% 50%)',
-}
 
 wezterm.on('toggle-window-style', function(window, pane)
   local overrides = window:get_config_overrides() or {}
   if not overrides.window_background_opacity then
-    overrides.window_background_opacity = 0.5
+    overrides.window_background_opacity = 0.9
     overrides.window_decorations = "RESIZE"
   else
     overrides.window_background_opacity = nil
