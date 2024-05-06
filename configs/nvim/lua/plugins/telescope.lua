@@ -4,7 +4,9 @@ return {
 	config = {
 		pickers = {
 			find_files = {
-				follow = true
+				follow = true,
+				hidden = true,
+				file_ignore_patterns = { ".git/", "node_modules/", ".DS_Store" },
 			}
 		}
 	}
