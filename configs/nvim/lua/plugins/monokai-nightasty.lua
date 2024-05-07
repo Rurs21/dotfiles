@@ -6,8 +6,8 @@ return {
         { "<leader>tt", "<cmd>MonokaiToggleLight<cr>", desc = "Monokai-Nightasty: Toggle dark/light theme." },
     },
     opts = {
-        dark_style_background = "transparent", -- default, dark, transparent, #color
-        light_style_background = "transparent", -- default, dark, transparent, #color
+        dark_style_background = "#181818", -- default, dark, transparent, #color
+        light_style_background = "#eff1f5", -- default, dark, transparent, #color
         color_headers = true, -- Enable header colors for each header level (h1, h2, etc.)
         lualine_bold = true, -- Lualine a and z sections font width
         lualine_style = "default", -- "dark", "light" or "default" (Follows dark/light style)
