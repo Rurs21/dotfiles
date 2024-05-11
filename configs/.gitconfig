@@ -1,21 +1,21 @@
 [user]
-        name = Rurs21
-        email = charles-emile96@hotmail.com
-        signingkey = E69A261857D7D3A7
+	name = Rurs21
+	email = rurs21@protonmail.com
+	signingkey = $GPG_SIGNING_KEY
 [color]
-        ui = true
+	ui = true
 [core]
-        editor = vim
-        excludesfile = ~/.gitignore
+	editor = nvim
+	excludesfile = ~/.gitignore
 [gpg]
-	program = /usr/local/bin/gpg
+	program = /usr/local/MacGPG2/bin/gpg
 [commit]
-        gpgsign = true
+	gpgsign = true
 [pull]
-        ff = only
+	ff = only
 [alias]
-        fuck = reset HEAD~1 --soft
-        yeet = !git add . && git commit -m "YEET!" && git push -f
-        scrap = !sh -c \"git checkout HEAD -- $1\" -
+	fuck = reset HEAD~1 --soft
+	yeet = !git add . && git commit -m "YEET!" && git push -f
+	scrap = !sh -c \"git checkout HEAD -- $1\" -
 [init]
 	defaultBranch = main
