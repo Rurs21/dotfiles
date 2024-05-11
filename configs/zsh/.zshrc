@@ -12,7 +12,7 @@ HISTSIZE='10000'
 SAVEHIST="${HISTSIZE}"
 
 # Variables
-export SHELLRC="$HOME/.zshrc"
+export SHELLRC="$ZDOTDIR/.zshrc"
 export EDITOR="/usr/bin/vim"
 export TMP="$HOME/tmp"
 export TEMP="$TMP"
