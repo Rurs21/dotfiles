@@ -1,5 +1,6 @@
 -- Pull in the wezterm API
 local wezterm = require 'wezterm'
+local scheme = require 'scheme'
 
 -- This table will hold the configuration.
 local config = {}
@@ -16,13 +17,18 @@ end
 config.enable_tab_bar = true
 config.hide_tab_bar_if_only_one_tab = true
 
-local hour = tonumber(os.date("%H"))
+config.font_size = 14.0
+config.window_padding = {
+	left = 0,
+	right = 0,
+	top = '0.5cell',
+	bottom = '0.5cell',
+}
 
-if hour >= 6 and hour < 18 then
-	config.color_scheme = 'Catppuccin Latte'
-else
-	config.color_scheme = 'Elementary'
-end
+-- scroll
+config.scrollback_lines = 3500
+
+config.color_scheme = scheme.color_scheme
 
 wezterm.on('toggle-window-style', function(window, pane)
 	local overrides = window:get_config_overrides() or {}
@@ -36,17 +42,6 @@ wezterm.on('toggle-window-style', function(window, pane)
 	window:set_config_overrides(overrides)
 end)
 
-wezterm.on('toggle-colorscheme', function(window, pane)
-	local overrides = window:get_config_overrides() or {}
-	if not overrides.color_scheme then
-		overrides.color_scheme = 'Catppuccin Latte'
-	elseif overrides.color_scheme == 'Elementary' then
-		overrides.color_scheme = 'Catppuccin Latte'
-	else
-		overrides.color_scheme = 'Elementary'
-	end
-	window:set_config_overrides(overrides)
-end)
 
 config.keys = {
 	{
