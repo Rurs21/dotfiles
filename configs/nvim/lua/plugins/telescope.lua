@@ -1,9 +1,4 @@
 local builtin = nil
-local function load_telescope_builtin()
-	if builtin == nil then
-		builtin = require('telescope.builtin')
-	end
-end
 
 return {
 	'nvim-telescope/telescope.nvim', tag = '0.1.6',
@@ -15,7 +10,6 @@ return {
 		{
 			"<leader>ps",
 			function()
-				load_telescope_builtin()
 				builtin.grep_string({ search = vim.fn.input("Grep > ") })
 			end,
 			desc = "Telescope grep string"
@@ -29,6 +23,11 @@ return {
 				file_ignore_patterns = { ".git/", "node_modules/", ".DS_Store" },
 			},
 		}
-	}
+	},
+	config = function(_, opts)
+		local telescope = require('telescope')
+		telescope.setup(opts)
+		builtin = telescope.builtin
+	end
 }
 
