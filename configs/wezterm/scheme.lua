@@ -29,15 +29,19 @@ function scheme_for_appearance(appearance)
 	end
 end
 
+function toggle_colorscheme(scheme)
+	if scheme == light_scheme then
+		return dark_scheme
+	elseif scheme == dark_scheme then
+		return light_scheme
+	else
+		return light_scheme
+	end
+end
+
 wezterm.on('toggle-colorscheme', function(window, pane)
 	local overrides = window:get_config_overrides() or {}
-	if not overrides.color_scheme then
-		overrides.color_scheme = light_scheme
-	elseif overrides.color_scheme == dark_scheme then
-		overrides.color_scheme = light_scheme
-	else
-		overrides.color_scheme = dark_scheme
-	end
+	overrides.color_scheme = toggle_colorscheme(overrides.color_scheme)
 	window:set_config_overrides(overrides)
 end)
 

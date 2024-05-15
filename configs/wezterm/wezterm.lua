@@ -1,8 +1,9 @@
 -- Pull in the wezterm API
 local wezterm = require 'wezterm'
 local scheme = require 'scheme'
+local fonts = require 'fonts'
 
--- This table will hold the configuration.
+-- This table will old the configuration.
 local config = {}
 
 -- In newer versions of wezterm, use the config_builder which will
@@ -12,6 +13,10 @@ if wezterm.config_builder then
 end
 
 -- This is where you actually apply your config choices
+
+config.color_scheme = scheme.color_scheme
+
+config.font = wezterm.font_with_fallback(fonts)
 
 -- tab
 config.enable_tab_bar = true
@@ -28,12 +33,10 @@ config.window_padding = {
 -- scroll
 config.scrollback_lines = 3500
 
-config.color_scheme = scheme.color_scheme
-
 wezterm.on('toggle-window-style', function(window, pane)
 	local overrides = window:get_config_overrides() or {}
 	if not overrides.window_background_opacity then
-		overrides.window_background_opacity = 0.9
+		overrides.window_background_opacity = 0.95
 		overrides.window_decorations = "RESIZE"
 	else
 		overrides.window_background_opacity = nil
