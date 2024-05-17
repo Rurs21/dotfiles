@@ -1,5 +1,5 @@
 return {
 	'nvim-treesitter/playground',
-	'tikhomirov/vim-glsl'
+	{ 'tikhomirov/vim-glsl', ft = { "glsl" } }
 }
 
