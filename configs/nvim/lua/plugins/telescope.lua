@@ -5,7 +5,8 @@ return {
 	lazy = true,
 	dependencies = { 'nvim-lua/plenary.nvim' },
 	keys = {
-		{ "<leader>pf", "<cmd>Telescope find_files<cr>", desc = "Telescope find files" },
+		{ "<leader>pf", "<cmd>Telescope find_files<cr>", desc = "Telescope find working dir files" },
+		{ "<leader>pb", "<cmd>Telescope buffers<cr>", desc = "Telescope buffers" },
 		{ "<C-p>", "<cmd>Telescope git_files<cr>", desc = "Telescope git files" },
 		{
 			"<leader>ps",
@@ -27,7 +28,7 @@ return {
 	config = function(_, opts)
 		local telescope = require('telescope')
 		telescope.setup(opts)
-		builtin = telescope.builtin
+		builtin = require('telescope.builtin')
 	end
 }
 
