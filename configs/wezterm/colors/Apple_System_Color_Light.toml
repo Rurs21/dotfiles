@@ -1,0 +1,18 @@
+# Apple System Colors Light
+[colors]
+foreground = "#000000" # "#1e1e1e"
+background = "#f9f9f9" # "#ffffff"
+cursor_bg = "#98989d"
+cursor_border = "#98989d"
+cursor_fg = "#000000" # "#575752" #"#98989d"
+selection_bg = "#aad1ff" #"#ffffff"
+selection_fg = "#3f638b"
+
+ansi = [ "#1a1a1a", "#cc372e", "#26a439", "#cdac08", "#0869cb", "#9647bf", "#479ec2", "#98989d" ]
+brights = [ "#464646", "#ff453a", "#32d74b", "#ffd60a", "#0a84ff", "#bf5af2", "#76d6ff", "#ffffff" ]
+
+[colors.indexed]
+
+[metadata]
+aliases = []
+name = "Apple System Colors Light"

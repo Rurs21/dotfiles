@@ -27,7 +27,7 @@ config.window_padding = {
 	left = 0,
 	right = 0,
 	top = '0.5cell',
-	bottom = '0.5cell',
+	bottom = 0,
 }
 
 -- scroll
@@ -56,6 +56,11 @@ config.keys = {
 		key = 'E',
 		mods = 'CTRL',
 		action = wezterm.action.EmitEvent 'toggle-colorscheme',
+	},
+	{
+		key = 'N',
+		mods = 'CTRL',
+		action = wezterm.action.ToggleFullScreen,
 	},
 }
 
