@@ -1,7 +1,7 @@
 local wezterm = require 'wezterm'
 
-local light_scheme = 'Catppuccin Latte'
-local dark_scheme = 'Elementary' 
+local light_scheme = 'Apple System Colors Light' --'Catppuccin Latte'
+local dark_scheme = 'Apple System Colors' --'Elementary'
 
 function fallback_appearance()
 	local hour = tonumber(os.date("%H"))
