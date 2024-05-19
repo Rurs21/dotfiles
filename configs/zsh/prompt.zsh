@@ -15,7 +15,7 @@ CYAN='\e[1;36m'
 NC='\e[0m'
 
 # Prompt
-user_info="%F{070}%n%f@%F{025}%m"
+user_info="%F{070}%n%f@%F{033}%m"
 working_dir="%F{036}%(4~|%-1~/.../%1~|%~)%f"
 PROMPT='${user_info} ${working_dir} %# '
 # Spelling prompt
@@ -31,7 +31,7 @@ function precmd() {
         # show git repo relative path
         git_toplv="$(basename $(git rev-parse --show-toplevel))"
         git_prefix="$(git rev-parse --show-prefix)"; git_prefix=${git_prefix%?}
-        git_working_dir="%F{041}${git_toplv}${git_prefix:+"/$git_prefix"}%f"
+        git_working_dir="%F{043}${git_toplv}${git_prefix:+"/$git_prefix"}%f"
         PROMPT='${user_info} ${git_working_dir} ${vcs_info_msg_0_}%# '
     fi
 }

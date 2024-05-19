@@ -4,8 +4,8 @@
 typeset -gA ZSH_HIGHLIGHT_STYLES
 # Highligth
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
-ZSH_HIGHLIGHT_STYLES[default]=fg=007
-ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=007
+ZSH_HIGHLIGHT_STYLES[default]=none
+ZSH_HIGHLIGHT_STYLES[unknown-token]=none
 ZSH_HIGHLIGHT_STYLES[alias]=fg=031,bold
 ZSH_HIGHLIGHT_STYLES[precommand]=fg=003
 ZSH_HIGHLIGHT_STYLES[command]=fg=031
@@ -16,7 +16,7 @@ ZSH_HIGHLIGHT_STYLES[arg0]=fg=031
 ZSH_HIGHLIGHT_STYLES[path]=fg=045,underline
 ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=fg=010
 ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=fg=010
-ZSH_HIGHLIGHT_PATTERNS=('rm -rf' 'fg=001')
-ZSH_HIGHLIGHT_PATTERNS=('poweroff' 'fg=011')
-ZSH_HIGHLIGHT_PATTERNS=('~' 'fg=162')
+ZSH_HIGHLIGHT_PATTERNS+=('rm -rf' 'fg=001,bold')
+ZSH_HIGHLIGHT_PATTERNS+=('poweroff' 'fg=011')
+ZSH_HIGHLIGHT_PATTERNS+=('~' 'fg=162')
 
