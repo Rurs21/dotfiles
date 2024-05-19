@@ -1,11 +1,11 @@
 # Apple System Colors Light
 [colors]
-foreground = "#000000" # "#1e1e1e"
-background = "#f9f9f9" # "#ffffff"
+foreground = "#1e1e1e"
+background = "#f7f7f7"
 cursor_bg = "#98989d"
 cursor_border = "#98989d"
-cursor_fg = "#000000" # "#575752" #"#98989d"
-selection_bg = "#aad1ff" #"#ffffff"
+cursor_fg = "ffffff"
+selection_bg = "#aad1ff"
 selection_fg = "#3f638b"
 
 ansi = [ "#1a1a1a", "#cc372e", "#26a439", "#cdac08", "#0869cb", "#9647bf", "#479ec2", "#98989d" ]
