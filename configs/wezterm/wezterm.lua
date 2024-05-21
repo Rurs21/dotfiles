@@ -1,7 +1,5 @@
 -- Pull in the wezterm API
 local wezterm = require 'wezterm'
-local scheme = require 'scheme'
-local fonts = require 'fonts'
 
 -- This table will old the configuration.
 local config = {}
@@ -12,10 +10,15 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
--- This is where you actually apply your config choices
+config.term = "wezterm"
 
+-- This is where you actually apply your config choices
+local scheme = require 'scheme'
 config.color_scheme = scheme.color_scheme
 
+local fonts = require 'fonts'
+-- disable ligatures + use zero with a line through
+config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0', 'zero' }
 config.font = wezterm.font_with_fallback(fonts)
 
 -- tab
