@@ -12,3 +12,18 @@ vim.keymap.set({"n", "v", "i"}, "<Right>", "<nop>")
 vim.keymap.set({"n", "v", "i"}, "<C-d>", "<nop>")
 vim.keymap.set({"n", "v", "i"}, "<C-u>", "<nop>")
 
+-- move select line(s) up or down
+vim.api.nvim_set_keymap('n', '<A-j>', ':m .+1<CR>==', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-k>', ':m .-2<CR>==', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<A-j>', ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<A-k>', ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
+
+-- toggle background (light/dark)
+vim.keymap.set({"n", "v", "i"}, "<leader>tt", function()
+	if vim.o.background == "light" then
+		vim.opt.background = "dark"
+	else
+		vim.opt.background = "light"
+	end
+end)
+
