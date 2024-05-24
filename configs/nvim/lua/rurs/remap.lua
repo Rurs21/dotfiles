@@ -1,5 +1,9 @@
+-- set leader
 vim.g.mapleader = " "
 vim.opt.timeoutlen = 1500
+vim.keymap.set("n", "<Space>", "<Nop>", { silent = true, remap = false })
+
+-- :)
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 -- disable arrow keys

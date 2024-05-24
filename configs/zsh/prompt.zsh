@@ -16,7 +16,7 @@ NC='\e[0m'
 
 # Prompt
 user_info="%F{070}%n%f@%F{033}%m"
-working_dir="%F{036}%(4~|%-1~/.../%1~|%~)%f"
+working_dir="%F{069}%(4~|%-1~/.../%1~|%~)%f"
 PROMPT='${user_info} ${working_dir} %# '
 # Spelling prompt
 SPROMPT='%F{197}Do you mean %B%r%b ? %F{3}Nyae!%f 🐱 '
