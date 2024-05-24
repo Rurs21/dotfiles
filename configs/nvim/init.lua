@@ -1,9 +1,8 @@
 print("hello")
 
---[[ load vim config
-local vimrc = "~/.vimrc"
-vim.cmd.source(vimrc)
-]]--
+-- load vim config
+-- local vimrc = "~/.vimrc"
+-- vim.cmd.source(vimrc)
 
 require("rurs")
 

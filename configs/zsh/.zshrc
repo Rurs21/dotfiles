@@ -36,7 +36,9 @@ alias python=python3
 alias pip=pip3
 
 # Zsh Line Editor [-e emac | -v  vi]
-bindkey -e
+bindkey -v
+# fix tmux delete key not working
+bindkey "^[[3~" delete-char
 
 autoload -U zmv
 autoload -Uz vcs_info
