@@ -1,31 +1,45 @@
-vim.opt.guicursor = ""
-vim.opt.mouse = ""
+local opt = vim.opt
 
-vim.opt.nu = true
-vim.opt.relativenumber = true
+-- time waited for key sequence
+opt.timeoutlen = 1500
 
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
+-- disable mouse
+opt.mouse = ""
 
-vim.opt.smartindent = true
+-- Line Numbers
+opt.number = true
+opt.relativenumber = true
 
-vim.opt.wrap = false
+-- Tabs & Indentation
+opt.tabstop = 4
+opt.shiftwidth = 4
+opt.smartindent = true
 
-vim.opt.swapfile = false
-vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
-vim.opt.undofile = true
+-- Line Wrapping
+opt.wrap = false
 
-vim.opt.hlsearch = false
-vim.opt.incsearch = true
+-- Search Settings
+opt.hlsearch = false
+opt.incsearch = true
 
-vim.opt.termguicolors = true
+-- Cursor Line
+opt.cursorline = true
 
-vim.opt.scrolloff = 8
-vim.opt.signcolumn = "yes"
-vim.opt.isfname:append("@-@")
+-- Appearance
+opt.termguicolors = true
+opt.showmode = false
+opt.signcolumn = "yes"
+opt.guicursor = ""
+opt.scrolloff = 10
+opt.colorcolumn = "80"
 
-vim.opt.updatetime = 50
+-- Undo
+opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+opt.undofile = true
 
---vim.opt.colorcolumn = "80"
+-- Files stuff
+opt.isfname:append("@-@")
+opt.updatetime = 50
+opt.swapfile = false
+opt.backup = false
 
