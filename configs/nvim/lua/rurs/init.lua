@@ -1,4 +1,4 @@
-require("rurs.remap")
+require("rurs.keymaps")
 require("rurs.lazy")
 require("rurs.set")
 require("rurs.cmd")
