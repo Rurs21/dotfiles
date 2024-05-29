@@ -15,6 +15,9 @@ opt.tabstop = 4
 opt.shiftwidth = 4
 opt.smartindent = true
 
+-- Keyword for snake_case
+opt.iskeyword:remove('_')
+
 -- Line Wrapping
 opt.wrap = false
 
