@@ -1,7 +1,9 @@
--- set leader
+-- set leaders
 vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
 
 local keymap = vim.keymap
+local utils = require('utils.functions')
 
 keymap.set("n", "<Space>", "<Nop>", { silent = true, remap = false })
 
@@ -21,11 +23,6 @@ keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
 keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
 
 -- toggle background (light/dark)
-keymap.set("n", "<leader>tt", function()
-	if vim.o.background == "light" then
-		vim.opt.background = "dark"
-	else
-		vim.opt.background = "light"
-	end
-end)
+keymap.set("n", "<leader>tt", utils.background_toggle)
+
 

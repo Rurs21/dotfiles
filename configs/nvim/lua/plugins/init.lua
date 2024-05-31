@@ -1,3 +1,10 @@
+-- install & setup Lazy plugins manager
+
+-- if source by lazy
+if package.loaded['lazy'] ~= nil then
+	return {}
+end
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	vim.cmd('echo "Installing Lazy.nvim" | redraw')
