@@ -6,7 +6,6 @@ plugins_txt=${ZDOTDIR:-~}/.zsh_plugins.txt
 static_file=${ZDOTDIR:-~}/.zsh_plugins.zsh
 
 # Clone antidote latest release if necessary
-
 [[ -e $antidote_dir ]] ||
     git clone --depth=1 https://github.com/mattmc3/antidote.git $antidote_dir
 

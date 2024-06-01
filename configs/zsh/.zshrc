@@ -6,24 +6,10 @@ source $ZDOTDIR/highlight.zsh
 source $ZDOTDIR/.zstyles
 source $ZDOTDIR/functions.zsh
 
-# History
-HISTFILE="${ZDOTDIR}/.zsh_history"
-HISTSIZE='10000'
-SAVEHIST="${HISTSIZE}"
-
-# Variables
-export SHELLRC="$ZDOTDIR/.zshrc"
-export EDITOR="/usr/bin/vim"
-export TMP="$HOME/tmp"
-export TEMP="$TMP"
-export TMPDIR="$TMP"
-export TMPPREFIX="${TMPDIR}/zsh"
-export GPG_TTY=$(tty)
-
 # Alias
 alias cp='cp -v'
 alias mv='mv -v'
-alias rm='rm -v'
+alias rm='rm -v -I'
 alias cc='clang -Wall -O -std=c17'
 alias colors='~/Scripts/colors.sh'
 alias gittime='~/Code/Scripts/gittime.sh'
@@ -36,7 +22,7 @@ alias python=python3
 alias pip=pip3
 
 # Zsh Line Editor [-e emac | -v  vi]
-bindkey -v
+bindkey -e
 # fix tmux delete key not working
 bindkey "^[[3~" delete-char
 
