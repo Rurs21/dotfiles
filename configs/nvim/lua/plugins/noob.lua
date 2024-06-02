@@ -12,7 +12,14 @@ return {
 	{
 		"tris203/precognition.nvim",
 		event = "VeryLazy",
-		opts = {}
+		opts = {
+			showBlankVirtLine = false,
+		},
+		config = function(_,opts)
+			vim.api.nvim_set_hl(0, 'Precognition', { fg = '#3493C9', bg = '#C5D8E3', italic = false })
+			opts.highlightColor = { link = 'Precognition' }
+			require('precognition').setup(opts)
+		end
 	}
 }
 
