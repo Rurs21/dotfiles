@@ -6,5 +6,5 @@ export ZDOTDIR=${ZDOTDIR:-$CONFIG_DIR/zsh}
 export SHELLRC=$ZDOTDIR/.zshrc
 export TMPPREFIX=$TMPDIR/zsh
 
-. $ZDOTDIR/.zshenv
+source $ZDOTDIR/.zshenv
 

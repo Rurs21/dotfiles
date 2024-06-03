@@ -34,8 +34,6 @@ export HISTFILESIZE=20000
 export HISTCONTROL=ignoreboth
 export HISTIGNORE="&:ls:[bf]g:exit"
 
-# misc
-export GPG_TTY=$(tty)
 
 . "$CONFIG_DIR/sh/.secrets.env"
 
