@@ -1,6 +1,7 @@
 " init vim 
 source ~/.vim/settings/options.vim
 source ~/.vim/settings/keymaps.vim
+source ~/.vim/settings/statusline.vim
 
 if has('nvim')
 	let g:vim_home = expand('~/.vim')
