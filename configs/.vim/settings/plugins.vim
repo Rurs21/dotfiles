@@ -1,15 +1,17 @@
 call plug#begin('~/.vim/plugged')
-	" Colorscheme
+
+	" fzf
+	Plug '/usr/local/opt/fzf'
+	Plug 'junegunn/fzf.vim'
+	nmap <leader>pf :Files<CR>
+
+	" Colorschemes
+	Plug 'NLKNguyen/papercolor-theme'
+	Plug 'habamax/vim-habamax', { 'as': 'habamax' }
+	Plug 'habamax/vim-habaurora', { 'as': 'habaurora' }
+	Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 	Plug 'tomasr/molokai'
 	let g:rehash256 = 1
-
-	"    Plug 'preservim/nerdtree'
-	"    map <C-n> :NERDTreeToggle<CR>
-	Plug 'Xuyuanp/nerdtree-git-plugin'
-
-	Plug 'vim-airline/vim-airline'
-	Plug 'vim-airline/vim-airline-themes'
-	let g:airline_theme='term'
 
 	Plug 'octol/vim-cpp-enhanced-highlight'
 	let g:cpp_class_scope_highlight = 1
