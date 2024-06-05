@@ -19,5 +19,3 @@ let g:netrw_alto = 0
 let g:netrw_list_hide = '.*\.swp$'
 let g:netrw_list_hide .= ',\.DS_Store'
 
-echom "vim netrw configured..."
-

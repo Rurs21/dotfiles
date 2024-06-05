@@ -6,7 +6,6 @@ source ~/.vim/settings/statusline.vim
 if has('nvim')
 	let g:vim_home = expand('~/.vim')
 else
-	echom "It's ViM :|"
 	source ~/.vim/settings/plugins.vim 
 endif
 

@@ -2,7 +2,7 @@ set laststatus=2
 
 function! SetStatusLineHighLights()
   if &background == 'dark'
-	highlight Statusline guifg=#ffffff guibg=#808080 cterm=NONE
+	highlight Statusline guifg=#ffffff guibg=#404040 cterm=NONE
     highlight StatuslineNormal guifg=#ffffff guibg=#008000 ctermfg=white ctermbg=green cterm=bold
     highlight StatuslineInsert guifg=#000000 guibg=#ffff00 ctermfg=black ctermbg=yellow cterm=bold
     highlight StatuslineVisual guifg=#ffffff guibg=#5f00af ctermfg=white ctermbg=darkmagenta cterm=bold
@@ -25,26 +25,34 @@ call SetStatusLineHighLights()
 function! StatuslineMode()
   let l:mode = mode()
   if l:mode ==# 'n'
-    return '%#StatuslineNormal# NORMAL '
+    return 'NORMAL'
   elseif l:mode ==# 'i'
-    return '%#StatuslineInsert# INSERT '
+    return 'INSERT'
   elseif l:mode ==# 'v' || l:mode ==# 'V' || l:mode ==# ''
-    return '%#StatuslineVisual# VISUAL '
+    return 'VISUAL'
   elseif l:mode ==# 'R'
-    return '%#StatuslineReplace# REPLACE '
+    return 'REPLACE'
   elseif l:mode ==# 'c'
-    return '%#StatuslineCommand# COMMAND '
+    return 'COMMAND'
   else
-    return '%#StatuslineNormal# UNKNOWN '
+    return 'UNKNOWN'
   endif
 endfunction
 
-set statusline=%{%StatuslineMode()%}\ 
-set statusline+=%#Statusline#
-set statusline+=\ %f
-set statusline+=\ %h%m%r
+function! ModeHightlight()
+	let l:mode = StatuslineMode()
+	if l:mode ==# 'UNKNOWN'
+		return '%#StatuslineNormal#'
+	endif
+	let l:mode = substitute(l:mode,'\(\<\w\+\>\)', '\u\1', 'g')
+	return '%#Statusline' . l:mode . '#'
+endfunction
+
+set statusline=%{%ModeHightlight()%}\ %{%StatuslineMode()%}\ %#Statusline#
+set statusline+=\ %t\ %h%m%r
 set statusline+=\ %=
+set statusline+=\ %{&fileencoding}\ │
+set statusline+=\ %{&fileformat}\ │
 set statusline+=\ %y
-set statusline+=\ %=%-14.(%l,%c%V%)
-set statusline+=\ %P
+set statusline+=\ %{%ModeHightlight()%}\ %-10.(%l,%c%V%)
 
