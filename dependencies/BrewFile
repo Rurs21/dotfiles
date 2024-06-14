@@ -1,0 +1,18 @@
+tap "homebrew/bundle"
+tap "homebrew/core"
+
+# programming languages and runtimes
+brew "julia"
+brew "node"
+brew "openjdk"
+brew "perl"
+
+brew "tmux"
+brew "bat"
+
+# files finders
+brew "fd"
+brew "fzf"
+brew "ripgrep"
+
+cask "wezterm"

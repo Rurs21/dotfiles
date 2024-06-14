@@ -1,9 +1,12 @@
 call plug#begin('~/.vim/plugged')
 
-	" fzf
+	" fuzzy finder
+	"let $FZF_DEFAULT_COMMAND = 'rg --files --hidden -g "!.git" '
+	"let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -f -g'
 	Plug '/usr/local/opt/fzf'
 	Plug 'junegunn/fzf.vim'
 	nmap <leader>pf :Files<CR>
+	nmap <leader>ps :RG<CR>
 
 	" Colorschemes
 	Plug 'NLKNguyen/papercolor-theme'

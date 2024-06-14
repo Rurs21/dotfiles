@@ -34,7 +34,7 @@ opt.showmode = false
 opt.signcolumn = "yes"
 opt.guicursor = ""
 opt.scrolloff = 10
-opt.colorcolumn = "80"
+--opt.colorcolumn = "80"
 
 -- Undo
 opt.undodir = os.getenv("HOME") .. "/.vim/undodir"

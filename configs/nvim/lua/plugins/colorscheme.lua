@@ -29,6 +29,20 @@ return {
 
 			require("monokai-nightasty").load(opts)
 		end
+	},
+
+	{
+		"scottmckendry/cyberdream.nvim",
+		enabled = false,
+		lazy = false,
+		priority = 1000,
+		opts = {
+			transparent = true,
+			italic_comments = true,
+			theme = {
+				variant = "default"
+			}
+		}
 	}
 }
 
