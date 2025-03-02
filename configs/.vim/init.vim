@@ -9,7 +9,12 @@ else
 	source ~/.vim/settings/plugins.vim 
 endif
 
-silent! colorscheme molokai
+let hour = str2nr(strftime("%H"))
+if hour >= 6 && hour < 18
+	silent! colorscheme habaurora	
+else
+	silent! colorscheme molokai
+endif
 
 autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
 autocmd FileType c set shiftwidth=8

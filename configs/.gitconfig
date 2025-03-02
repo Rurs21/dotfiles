@@ -5,7 +5,7 @@
 [color]
 	ui = true
 [core]
-	editor = nvim
+	editor = vim
 	excludesfile = ~/.gitignore
 [gpg]
 	program = /usr/local/MacGPG2/bin/gpg
@@ -17,5 +17,6 @@
 	fuck = reset HEAD~1 --soft
 	yeet = !git add . && git commit -m "YEET!" && git push -f
 	scrap = !sh -c \"git checkout HEAD -- $1\" -
+	commit-at = !sh -c 'LC_ALL=C GIT_COMMITTER_DATE=\"$1\" git commit --date \"$1\"' -
 [init]
 	defaultBranch = main

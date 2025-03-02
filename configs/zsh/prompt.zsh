@@ -14,16 +14,20 @@ cyan='\e[0;36m'
 CYAN='\e[1;36m'
 NC='\e[0m'
 
-# Prompt
-user_info="%F{070}%n%f@%F{033}%m"
-working_dir="%F{069}%(4~|%-1~/.../%1~|%~)%f"
-PROMPT='${user_info} ${working_dir} %# '
 # Spelling prompt
 SPROMPT='%F{197}Do you mean %B%r%b ? %F{3}Nyae!%f 🐱 '
 # Right prompt
-#RPROMPT='%(?,%F{green}:%),%F{yellow}%? %F{red}:()%f'
+RPROMPT='%(?,%F{green}:%),%F{yellow}%? %F{red}:()%f'
+# Primary prompt
+user_info="%F{070}%n%f@%F{033}%m"
+working_dir="%F{069}%(4~|%-1~/.../%1~|%~)%f"
+PROMPT='${user_info} ${working_dir} %# '
 
-function precmd() {
+if [[ -n "$TMUX" ]]; then
+	user_info=""
+fi
+
+function zsh_git_prompt() {
     vcs_info
     if [[ -z ${vcs_info_msg_0_} ]]; then
         PROMPT='${user_info} ${working_dir} %# '
@@ -35,3 +39,6 @@ function precmd() {
         PROMPT='${user_info} ${git_working_dir} ${vcs_info_msg_0_}%# '
     fi
 }
+
+precmd_functions+=(zsh_git_prompt)
+

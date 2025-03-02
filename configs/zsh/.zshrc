@@ -37,3 +37,7 @@ setopt extended_glob
 setopt prompt_subst
 setopt correct
 
+source <(fzf --zsh)
+
+$HOME/.夜明け.sh
+
