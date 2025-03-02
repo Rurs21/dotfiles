@@ -20,12 +20,13 @@ local fonts = require 'fonts'
 -- disable ligatures + use zero with a line through
 config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0', 'zero' }
 config.font = wezterm.font_with_fallback(fonts)
+config.font_size = 14.0
+config.adjust_window_size_when_changing_font_size = false
 
 -- tab
 config.enable_tab_bar = true
 config.hide_tab_bar_if_only_one_tab = true
 
-config.font_size = 14.0
 config.window_padding = {
 	left = 0,
 	right = 0,
@@ -65,6 +66,23 @@ config.keys = {
 		mods = 'CTRL',
 		action = wezterm.action.ToggleFullScreen,
 	},
+	{
+		key = 'Z',
+		mods = 'CTRL',
+		action = wezterm.action.PromptInputLine {
+			description = 'Enter font size',
+			action = wezterm.action_callback(function(window, pane, line)
+				if line then
+					local number = tonumber(line)
+					if number then
+						local overrides = window:get_config_overrides() or {}
+						overrides.font_size = number
+						window:set_config_overrides(overrides)
+					end
+				end
+			end),
+		},
+	}
 }
 
 -- and finally, return the configuration to wezterm

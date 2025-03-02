@@ -28,6 +28,9 @@ set listchars=tab:>\ ,trail:-,extends:>,precedes:<,eol:$,nbsp:·
 " Line Wrapping
 set nowrap
 
+" Format Options
+set formatoptions-=cro
+
 " Search Settings
 set hlsearch
 set incsearch
@@ -47,12 +50,15 @@ set colorcolumn="80"
 set visualbell
 
 " Undo
-set undofile
 set undodir="~/.vim/undodir"
+set undofile
 
 " Files stuff
 set isfname+=@-@
 set updatetime=50
 set noswapfile
 set nobackup
+
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
 

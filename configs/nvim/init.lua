@@ -10,8 +10,7 @@ local datetime_message = string.format(
 print(datetime_message)
 
 -- load vim config
-local vimrc = "~/.vimrc"
-vim.cmd.source(vimrc)
+vim.cmd.source("~/.vimrc")
 
 -- load vim runtime config
 local vim_home = vim.fn.expand('~/.vim')
@@ -35,4 +34,6 @@ end
 require("core")
 require("plugins")
 require("utils")
+
+vim.cmd.colorscheme('default')
 

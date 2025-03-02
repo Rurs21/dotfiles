@@ -24,3 +24,4 @@ config_dir=$(pwd -P)/configs
 
 relink $config_dir $HOME
 relink $config_dir/_$(uname) $HOME
+
