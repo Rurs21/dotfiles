@@ -41,9 +41,9 @@ if [ $(uname) = Darwin ]; then
     fi
 fi
 
-if [ ! -e ~/.vim/autoload/plug.vim ]; then
+if [ ! -e ~/.config/vim/autoload/plug.vim ]; then
     echo_running "Installing vim-plug..."
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    curl -fLo ~/.config/vim/autoload/plug.vim --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     echo_ok
 fi
