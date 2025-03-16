@@ -1,0 +1,3 @@
+" source vimrc
+source ~/.config/vim/init.vim
+

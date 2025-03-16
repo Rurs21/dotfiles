@@ -10,7 +10,7 @@ local datetime_message = string.format(
 print(datetime_message)
 
 -- load vim config
-vim.cmd.source("~/.vimrc")
+vim.cmd.source("~/.config/vim/vimrc")
 
 -- load vim runtime config
 local vim_home = vim.fn.expand('~/.vim')
