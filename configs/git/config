@@ -18,5 +18,7 @@
 	yeet = !git add . && git commit -m "YEET!" && git push -f
 	scrap = !sh -c \"git checkout HEAD -- $1\" -
 	commit-at = !sh -c 'LC_ALL=C GIT_COMMITTER_DATE=\"$1\" git commit --date \"$1\"' -
+	amend = commit --amend
+	empty = commit --allow-empty
 [init]
 	defaultBranch = main
