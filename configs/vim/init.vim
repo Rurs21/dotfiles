@@ -1,12 +1,12 @@
 " init vim 
-source ~/.vim/settings/options.vim
-source ~/.vim/settings/keymaps.vim
-source ~/.vim/settings/statusline.vim
+source ~/.config/vim/settings/options.vim
+source ~/.config/vim/settings/keymaps.vim
+source ~/.config/vim/settings/statusline.vim
 
 if has('nvim')
-	let g:vim_home = expand('~/.vim')
+	let g:vim_home = expand('~/.config/vim')
 else
-	source ~/.vim/settings/plugins.vim 
+	source ~/.config/vim/settings/plugins.vim
 endif
 
 let hour = str2nr(strftime("%H"))

@@ -1,4 +1,4 @@
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/vim/plugged')
 
 	" fuzzy finder
 	"let $FZF_DEFAULT_COMMAND = 'rg --files --hidden -g "!.git" '
