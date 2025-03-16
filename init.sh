@@ -48,7 +48,9 @@ if [ ! -e ~/.vim/autoload/plug.vim ]; then
     echo_ok
 fi
 
-if [ ! -e ~/.antigen/antigen.zsh ]; then
-   echo_running "Installing antigen..."
-   curl -fLo ~/.antigen/antigen.zsh --create-dirs git.io/antigen
+if [ ! -e ~/.config/tmux/plugins/tpm ]; then
+   echo_running "Installing tmux tpm..."
+   git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+   echo_ok
 fi
+
