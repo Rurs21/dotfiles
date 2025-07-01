@@ -1,27 +1,35 @@
 #!/bin/sh
 
-# Recursion link
+# Run from script's directory to handle relative paths
+cd "${0%/*}" || exit 1
+
+. "./_lib.sh" 
+
+# Recursively symlink files from src to dest
 # $1=src $2=dest
 relink() {
-    # Include hidden files and Exclude files starting with _
-    for file in $1/{[^_],.[^.],..?}*; do
-        if [ -f $file ]; then
-            ln -sf $file $2
-        elif [ -d $file ]; then
-            dir=`basename $file`
-            dest=$2/$dir
-            #  Add to .config if no hidden parent dir
-            if [ ${dir:0:1} != "." ] && [ ${2#*'.'} == $2 ]; then
-                dest=$2/.config/$dir
-            fi
-            mkdir -p $dest
-            relink $file $dest
-        fi
-    done
+	# Iterate over files and directories, including hidden, skipping _* and . ..
+	for file in "$1"/[!._]* "$1"/.[!.]* "$1"/..?*; do
+		[ -e "$file" ] || continue
+		file_name=$(basename "$file")
+
+		if [ -f "$file" ] && [ ! -e "$2/$file_name" ] ; then
+			ln -s "$file" "$2"
+			printf '%s/%b\n' "~${2#"$HOME"}" "${BOLD}$file_name${RESET}";
+		elif [ -d "$file" ]; then
+			# Add to .config if not hidden parent dir
+			case "$2/$file_name" in
+				*.*) subdir=$2/$file_name ;;
+				*) 	 subdir="$2/.config/$file_name" ;;
+			esac
+			mkdir -p "$subdir"
+			relink "$file" "$subdir" # Recurse
+		fi
+	done
 }
 
-config_dir=$(pwd -P)/configs
+CONFIG_DIR=$(pwd -P)/configs
 
-relink $config_dir $HOME
-relink $config_dir/_$(uname) $HOME
+relink "$CONFIG_DIR" "$HOME"
+relink "$CONFIG_DIR/_$(uname)" "$HOME"
 
