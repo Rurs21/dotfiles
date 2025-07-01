@@ -1,56 +1,53 @@
 #!/bin/sh
 
-ESC_SEQ="\x1b["
-COL_RESET=$ESC_SEQ"39;49;00m"
-COL_RED=$ESC_SEQ"31;01m"
-COL_GREEN=$ESC_SEQ"32;01m"
-COL_YELLOW=$ESC_SEQ"33;01m"
+# log file
+LOGFILE="$HOME/init_dotfiles.log"
+echo "" > "$LOGFILE"
 
-echo_ok() {
-    printf '%b\n' "$COL_GREEN[ok]$COL_RESET $1"
-}
+SCRIPT_DIR=$(cd "$(dirname -- "$0")" && pwd)
+. "$SCRIPT_DIR/_lib.sh"
 
-echo_running() {
-    printf '%b\n' "$COL_YELLOW ⇒ $COL_RESET $1"
-}
+setup_traps
 
-echo_fatal() {
-    printf '%b\n' "$COL_RED[error]$COL_RESET $1"; exit 1
-}
+echo_bold "POSIX init script\n"
 
-is_installed() {
-    command -v "$1" &> /dev/null && return 0 || return 1
-}
+prompt_sudo
 
 if [ $(uname) = Darwin ]; then
-    if [ ! -e /Library/Developer/CommandLineTools/usr/bin/git ]; then
-        echo_running "Installing xcode tools..."
-        xcode-select --install
-        echo_ok
-    fi
-    echo_running "Installing updates..."
-    sudo softwareupdate -i -a
-    echo_ok
-    if is_installed brew; then
-        echo_running "Updating brew..."
-        brew update
-        brew upgrade
-    else
-        echo_running "Installing brew..."
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebew/install/master/install.sh)" || echo_fatal
-    fi
+	echo "For MacOS..."
+	# install xcode
+	echo_running "Installing xcode tools... "
+	if [ ! -e /Library/Developer/CommandLineTools/usr/bin/git ]; then
+		xcode-select --install >> "$LOGFILE" 2>&1
+	fi
+	if prompt_yn "Update xcode tools ?"; then
+		echo_running "Updating xcode tools... "
+		sudo softwareupdate -i -a >> "$LOGFILE" 2>&1 
+	fi
+	echo_ok "xcode tools"
+	# install brew
+	echo_running "Installing brew... "
+	if ! is_installed brew; then
+		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebew/install/master/install.sh)" || echo_fatal
+	else
+		echo_running "Updating brew... "
+		brew update >> "$LOGFILE" 2>&1
+		brew upgrade >> "$LOGFILE" 2>&1
+	fi
+	echo_ok "brew"
 fi
 
+
+echo_running "Installing vim-plug... "
 if [ ! -e ~/.config/vim/autoload/plug.vim ]; then
-    echo_running "Installing vim-plug..."
-    curl -fLo ~/.config/vim/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    echo_ok
+	curl -fLo ~/.config/vim/autoload/plug.vim --create-dirs \
+		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
+echo_ok "vim-plug"
 
+echo_running "Installing tmux tpm... "
 if [ ! -e ~/.config/tmux/plugins/tpm ]; then
-   echo_running "Installing tmux tpm..."
-   git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
-   echo_ok
+	git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 fi
+echo_ok "tmux tpm"
 
