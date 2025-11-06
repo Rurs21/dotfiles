@@ -16,7 +16,7 @@ return {
 			showBlankVirtLine = false,
 		},
 		config = function(_,opts)
-			vim.api.nvim_set_hl(0, 'Precognition', { fg = '#3493C9', bg = '#C5D8E3', italic = false })
+			vim.api.nvim_set_hl(0, 'Precognition', { fg = '#3CB371', bg = 'none', italic = false, bold = true })
 			opts.highlightColor = { link = 'Precognition' }
 			require('precognition').setup(opts)
 		end

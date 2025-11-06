@@ -32,12 +32,16 @@ function zsh_git_prompt() {
     if [[ -z ${vcs_info_msg_0_} ]]; then
         PROMPT='${user_info} ${working_dir} %# '
     else
-        # show git repo relative path
-        git_toplv="$(basename $(git rev-parse --show-toplevel))"
-        git_prefix="$(git rev-parse --show-prefix)"; git_prefix=${git_prefix%?}
-        git_working_dir="%F{043}${git_toplv}${git_prefix:+"/$git_prefix"}%f"
-        PROMPT='${user_info} ${git_working_dir} ${vcs_info_msg_0_}%# '
-    fi
+		# show git repo relative path
+		git_toplv="$(basename $(git -C ${PWD%%/.git*} rev-parse --show-toplevel))"
+		if [[ $PWD == */.git* ]]; then
+			git_working_dir="%F{043}${git_toplv}%F{045}/.git${PWD#*/.git}%f"
+		else
+			git_prefix="$(git rev-parse --show-prefix)"; git_prefix=${git_prefix%?}
+			git_working_dir="%F{043}${git_toplv}${git_prefix:+"/$git_prefix"}%f"
+		fi
+		PROMPT='${user_info} ${git_working_dir} ${vcs_info_msg_0_}%# '
+	fi
 }
 
 precmd_functions+=(zsh_git_prompt)

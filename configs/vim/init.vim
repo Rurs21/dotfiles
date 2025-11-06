@@ -3,6 +3,7 @@ source ~/.config/vim/settings/options.vim
 source ~/.config/vim/settings/keymaps.vim
 source ~/.config/vim/settings/statusline.vim
 
+set runtimepath+=~/.config/vim
 if has('nvim')
 	let g:vim_home = expand('~/.config/vim')
 else
@@ -18,6 +19,9 @@ endif
 
 autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
 autocmd FileType c set shiftwidth=8
+
+" Signal a modern POSIX shell support to plugins/syntax
+let g:is_posix = 1
 
 " Prevent screen clearing issues in certain terminals
 let &t_ut=''
