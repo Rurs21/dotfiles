@@ -37,7 +37,10 @@ export HISTIGNORE="&:ls:[bf]g:exit"
 
 . "$CONFIG_DIR/sh/.secrets.env"
 
-. "$HOME/.cargo/env"
+CARGO_ENV="$HOME/.cargo/env"
+if [ -e "$CARGO_ENV" ]; then
+	. "$HOME/.cargo/env"
+fi
 
 export PROFILE_READ=true
 
