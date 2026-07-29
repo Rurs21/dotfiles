@@ -28,7 +28,7 @@ if [ $(uname) = Darwin ]; then
 	# install brew
 	echo_running "Installing brew... "
 	if ! is_installed brew; then
-		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebew/install/master/install.sh)" || echo_fatal
+		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" || echo_fatal
 	else
 		echo_running "Updating brew... "
 		brew update >> "$LOGFILE" 2>&1
