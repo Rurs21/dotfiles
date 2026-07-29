@@ -29,7 +29,8 @@ relink() {
 }
 
 CONFIG_DIR=$(pwd -P)/configs
+PLATFORM=$(uname | tr '[:upper:]' '[:lower:]')
 
 relink "$CONFIG_DIR" "$HOME"
-relink "$CONFIG_DIR/_$(uname)" "$HOME"
+relink "$CONFIG_DIR/_$PLATFORM" "$HOME"
 

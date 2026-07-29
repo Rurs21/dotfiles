@@ -1,6 +1,6 @@
 
 # default programs
-export EDTIOR=vim
+export EDITOR=vim
 export PAGER=less
 export MANPAGER=$PAGER
 export BROWSER=firefox

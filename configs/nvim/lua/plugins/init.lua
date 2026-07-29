@@ -26,7 +26,7 @@ return require('lazy').setup('plugins', {
 	},
 	install = {
 		missing = false,
-		colorschme = { "default", "habamax" }
+		colorscheme = { "default", "habamax" }
 	},
 	performance = {
 		reset_packpath = true,
