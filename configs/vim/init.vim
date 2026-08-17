@@ -14,6 +14,9 @@ endif
 " load vim specific plugins
 source ~/.config/vim/settings/plugins.vim
 
+" configure Vim's adapter for the shared language servers
+source ~/.config/vim/settings/lsp.vim
+
 " follow the terminal/system appearance
 source ~/.config/vim/settings/colors.vim
 

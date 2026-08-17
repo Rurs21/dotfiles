@@ -22,13 +22,6 @@ call plug#begin('~/.config/vim/plugged')
 	Plug 'rust-lang/rust.vim'
 
 	Plug 'dense-analysis/ale'
-	let g:ale_linters = {
-				\ 'rust': ['analyzer'],
-				\}
-	let g:ale_fixers = {
-				\ '*': ['remove_trailing_lines', 'trim_whitespace'],
-				\ 'rust': ['RustFmt']
-				\}
 
 	Plug 'pangloss/vim-javascript'
 	let g:javascript_plugin_jsdoc = 1

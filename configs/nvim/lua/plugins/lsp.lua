@@ -1,18 +1,9 @@
 return {
 	{
-		'VonHeikemen/lsp-zero.nvim', branch = 'v3.x',
-		lazy = true,
-		config = false,
-		init = function()
-			-- Disable automatic setup, we are doing it manually
-			vim.g.lsp_zero_extend_cmp = 0
-			vim.g.lsp_zero_extend_lspconfig = 0
-		end,
-	},
-	{
 		'williamboman/mason.nvim',
 		lazy = false,
-		config = true,
+		-- Keep Mason-only tools available without shadowing shared LSP binaries.
+		opts = { PATH = 'append' },
 	},
 
 	-- Autocompletion
@@ -30,13 +21,17 @@ return {
 			{'rafamadriz/friendly-snippets'},
 		},
 		config = function()
-			-- Here is where you configure the autocompletion settings.
-			local lsp_zero = require('lsp-zero')
-			lsp_zero.extend_cmp()
-
-			-- And you can configure cmp even more, if you want to.
 			local cmp = require('cmp')
-			local cmp_action = lsp_zero.cmp_action()
+			local luasnip = require('luasnip')
+			local function snippet_jump(direction)
+				return cmp.mapping(function(fallback)
+					if luasnip.locally_jumpable(direction) then
+						luasnip.jump(direction)
+					else
+						fallback()
+					end
+				end, { 'i', 's' })
+			end
 
 			cmp.setup({
 				sources = {
@@ -46,17 +41,16 @@ return {
 					{name = 'luasnip', keyword_length = 2},
 					{name = 'buffer', keyword_length = 3},
 				},
-				formatting = lsp_zero.cmp_format({details = true}),
 				mapping = cmp.mapping.preset.insert({
-					['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-					['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+					['<C-p>'] = cmp.mapping.select_prev_item(),
+					['<C-n>'] = cmp.mapping.select_next_item(),
 					['<C-e>'] = cmp.mapping.abort(),
 					['<CR>'] = cmp.mapping.confirm({ select = true }),
 					['<C-Space>'] = cmp.mapping.complete(),
 					['<C-u>'] = cmp.mapping.scroll_docs(-4),
 					['<C-d>'] = cmp.mapping.scroll_docs(4),
-					['<C-f>'] = cmp_action.luasnip_jump_forward(),
-					['<C-b>'] = cmp_action.luasnip_jump_backward(),
+					['<C-f>'] = snippet_jump(1),
+					['<C-b>'] = snippet_jump(-1),
 				}),
 				snippet = {
 					expand = function(args)
@@ -70,53 +64,41 @@ return {
 	-- LSP
 	{
 		'neovim/nvim-lspconfig',
-		cmd = {'LspInfo', 'LspInstall', 'LspStart'},
+		cmd = {'LspInfo', 'LspStart'},
 		event = {'BufReadPre', 'BufNewFile'},
 		dependencies = {
 			{'hrsh7th/cmp-nvim-lsp'},
-			{'williamboman/mason-lspconfig.nvim'},
 		},
 		config = function()
-			-- This is where all the LSP shenanigans will live
-			local lsp_zero = require('lsp-zero')
-			lsp_zero.extend_lspconfig()
+			local capabilities = require('cmp_nvim_lsp').default_capabilities()
+			local function on_attach(_, bufnr)
+				local opts = { buffer = bufnr, silent = true }
+				vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+				vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+				vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
+				vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
+				vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, opts)
+				vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, opts)
+				vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)
+				vim.keymap.set("n", "<leader>vrr", vim.lsp.buf.references, opts)
+				vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename, opts)
+				vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
+			end
 
-			--- if you want to know more about lsp-zero and mason.nvim
-			--- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
-			lsp_zero.on_attach(function(client, bufnr)
-				-- see :help lsp-zero-keybindings
-				-- to learn the available actions
-				lsp_zero.default_keymaps({buffer = bufnr, remap = false})
-
-				vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-				vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-				vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-				vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-				vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-				vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
-				vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
-				vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
-				vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
-				vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-			end)
-
-			require('mason-lspconfig').setup({
-				ensure_installed = {'ts_ls', 'rust_analyzer'},
-				handlers = {
-					-- this first function is the "default handler"
-					-- it applies to every language server without a "custom handler"
-					function(server_name)
-						require('lspconfig')[server_name].setup({})
-					end,
-
-					-- this is the "custom handler" for `lua_ls`
-					lua_ls = function()
-						-- (Optional) Configure lua language server for neovim
-						local lua_opts = lsp_zero.nvim_lua_ls()
-						require('lspconfig').lua_ls.setup(lua_opts)
-					end,
-				}
+			vim.lsp.config('*', {
+				capabilities = capabilities,
+				on_attach = on_attach,
 			})
+			vim.lsp.config('lua_ls', {
+				settings = {
+					Lua = {
+						diagnostics = { globals = { 'vim' } },
+						workspace = { library = vim.api.nvim_get_runtime_file('', true) },
+					},
+				},
+			})
+
+			vim.lsp.enable({'lua_ls', 'rust_analyzer', 'tsc'})
 		end
 	}
 }
