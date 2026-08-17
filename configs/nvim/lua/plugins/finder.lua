@@ -9,14 +9,7 @@ local telescope_plugin =
 		{ "<leader>pf", "<cmd>Telescope find_files<cr>", desc = "Telescope find working dir files" },
 		{ "<leader>pb", "<cmd>Telescope buffers<cr>", desc = "Telescope buffers" },
 		{ "<C-p>", "<cmd>Telescope git_files<cr>", desc = "Telescope git files" },
-		{
-			"<leader>ps",
-			function()
-				local builtin = require('telescope.builtin')
-				builtin.grep_string({ search = vim.fn.input("Grep > ") })
-			end,
-			desc = "Telescope grep string"
-		},
+		{ "<leader>ps", "<cmd>Telescope live_grep<cr>", desc = "Telescope live grep" },
 	},
 	opts = {
 		pickers = {
@@ -25,7 +18,7 @@ local telescope_plugin =
 				hidden = true,
 				file_ignore_patterns = { ".git/", "node_modules/", ".DS_Store" },
 			},
-			grep_string = {
+			live_grep = {
 				additional_args = function(_)
 					return { "--hidden" }
 				end,

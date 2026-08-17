@@ -34,13 +34,14 @@ export HISTFILESIZE=20000
 export HISTCONTROL=ignoreboth
 export HISTIGNORE="&:ls:[bf]g:exit"
 
-
 . "$CONFIG_DIR/sh/.secrets.env"
 
 CARGO_ENV="$HOME/.cargo/env"
 if [ -e "$CARGO_ENV" ]; then
 	. "$HOME/.cargo/env"
 fi
+
+export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
 
 export PROFILE_READ=true
 

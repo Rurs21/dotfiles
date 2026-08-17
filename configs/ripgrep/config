@@ -1,0 +1,6 @@
+# Include hidden files and directories
+--hidden
+
+# Excluding .git
+--glob=!**/.git/**
+
