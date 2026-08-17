@@ -11,7 +11,7 @@ print(datetime_message)
 
 -- use vim config as the shared baseline
 local vim_home = vim.fn.expand("~/.config/vim")
-local vim_config = vim_home .. "/init.vim"
+local vim_config = vim_home .. "/vimrc"
 
 -- load vim config
 vim.cmd.source(vim.fn.fnameescape(vim_config))
