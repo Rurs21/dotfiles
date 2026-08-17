@@ -9,31 +9,18 @@ local datetime_message = string.format(
 )
 print(datetime_message)
 
--- load vim config
-vim.cmd.source("~/.config/vim/vimrc")
+-- use vim config as the shared baseline
+local vim_home = vim.fn.expand("~/.config/vim")
+local vim_config = vim_home .. "/init.vim"
 
+-- load vim config
+vim.cmd.source(vim.fn.fnameescape(vim_config))
 -- load vim runtime config
-local vim_home = vim.fn.expand('~/.vim')
 vim.opt.rtp:prepend(vim_home)
 vim.opt.rtp:append(vim_home .. '/after')
 
--- fix messages highlight at startup
-vim.api.nvim_create_autocmd("VimEnter", {
-	callback = function()
-		vim.cmd('redraw')
-	end
-})
-
-local hour = tonumber(os.date("%H"))
-if hour >= 6 and hour < 18 then
-	vim.opt.background = "light"
-else
-	vim.opt.background = "dark"
-end
-
+-- everything loaded below is Neovim-specific
 require("core")
 require("plugins")
 require("utils")
-
-vim.cmd.colorscheme('default')
 

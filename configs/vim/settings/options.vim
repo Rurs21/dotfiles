@@ -44,13 +44,14 @@ set noshowmode
 set signcolumn=yes
 set guicursor=""
 set scrolloff=10
-set colorcolumn="80"
+set colorcolumn=80
 
 " Behaviour
 set visualbell
 
-" Undo
-set undodir="~/.vim/undodir"
+" Vim persistent undo directory. Neovim overrides this in core/options.lua.
+let &undodir = expand('~/.vim/undo')
+call mkdir(&undodir, 'p', 0700)
 set undofile
 
 " Files stuff
@@ -58,7 +59,7 @@ set isfname+=@-@
 set updatetime=50
 set noswapfile
 set nobackup
+set nowritebackup
 
-filetype plugin on
+filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
-

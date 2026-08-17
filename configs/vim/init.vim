@@ -1,27 +1,21 @@
-" init vim 
+" shared baseline for Vim and Neovim
 source ~/.config/vim/settings/options.vim
 source ~/.config/vim/settings/keymaps.vim
+source ~/.config/vim/settings/filetypes.vim
 source ~/.config/vim/settings/statusline.vim
 
 set runtimepath+=~/.config/vim
+
 if has('nvim')
 	let g:vim_home = expand('~/.config/vim')
-else
-	source ~/.config/vim/settings/plugins.vim
+	finish
 endif
 
-let hour = str2nr(strftime("%H"))
-if hour >= 6 && hour < 18
-	silent! colorscheme habaurora	
-else
-	silent! colorscheme molokai
-endif
+" load vim specific plugins
+source ~/.config/vim/settings/plugins.vim
 
-autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
-autocmd FileType c set shiftwidth=8
-
-" Signal a modern POSIX shell support to plugins/syntax
-let g:is_posix = 1
+" follow the terminal/system appearance
+source ~/.config/vim/settings/colors.vim
 
 " Prevent screen clearing issues in certain terminals
 let &t_ut=''

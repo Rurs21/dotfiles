@@ -18,8 +18,11 @@ function! SetStatusLineHighLights()
   endif
 endfunction
 
-autocmd OptionSet background call SetStatusLineHighLights()
-autocmd ColorScheme * call SetStatusLineHighLights()
+augroup shared_statusline
+  autocmd!
+  autocmd OptionSet background call SetStatusLineHighLights()
+  autocmd ColorScheme * call SetStatusLineHighLights()
+augroup END
 call SetStatusLineHighLights()
 
 function! StatuslineMode()
@@ -39,7 +42,7 @@ function! StatuslineMode()
   endif
 endfunction
 
-function! ModeHightlight()
+function! ModeHighlight()
 	let l:mode = StatuslineMode()
 	if l:mode ==# 'UNKNOWN'
 		return '%#StatuslineNormal#'
@@ -48,11 +51,10 @@ function! ModeHightlight()
 	return '%#Statusline' . l:mode . '#'
 endfunction
 
-set statusline=%{%ModeHightlight()%}\ %{%StatuslineMode()%}\ %#Statusline#
+set statusline=%{%ModeHighlight()%}\ %{%StatuslineMode()%}\ %#Statusline#
 set statusline+=\ %t\ %h%m%r
 set statusline+=\ %=
 set statusline+=\ %{&fileencoding}\ │
 set statusline+=\ %{&fileformat}\ │
 set statusline+=\ %y
-set statusline+=\ %{%ModeHightlight()%}\ %-10.(%l,%c%V%)
-
+set statusline+=\ %{%ModeHighlight()%}\ %-10.(%l,%c%V%)

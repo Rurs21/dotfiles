@@ -1,22 +1,12 @@
-function ClearBackground()
+local function clear_background()
 	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
 
-function ColorMyPencils(color)
-    color = color or "default"
+local group = vim.api.nvim_create_augroup("TransparentBackground", { clear = true })
+vim.api.nvim_create_autocmd("ColorScheme", {
+	group = group,
+	callback = clear_background,
+})
 
-    local hour = tonumber(os.date("%H"))
-
-    if hour >= 6 and hour < 18 then
-        vim.opt.background = "light"
-    else
-        vim.opt.background = "dark"
-    end
-
-    vim.cmd.colorscheme(color)
-end
-
-ColorMyPencils("monokai-nightasty")
-ClearBackground()
-
+clear_background()
