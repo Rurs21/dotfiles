@@ -28,6 +28,11 @@ echo_running() {
 	printf '%b' "${YELLOW}[\]${RESET} $1"
 }
 
+echo_warn() {
+	printf '%b' "$CLEAR_LINE"
+	printf '%b\n' "${YELLOW}[warning]${RESET} $1"
+}
+
 echo_fatal() {
 	printf '%b' "$CLEAR_LINE"
 	printf '%b\n' "${RED}[error]${RESET} $1"; exit 1
@@ -85,24 +90,25 @@ prompt_sudo() {
 # Restores terminal settings, shows cursor, and exits cleanly.
 
 SIGNALS="EXIT QUIT TERM INT HUP ABRT PIPE ALRM"
-INTERRUPT_SIGNALS=$(set -- $SIGNALS; shift; echo "$*")
+INTERRUPT_SIGNALS=${SIGNALS#* }
 cleanup() {
-	sig="$1"
+	status="$1"
+	sig="$2"
 	if [ -n "$sig" ]; then
 		printf '\n%s' "Caught signal: $sig — "
 	fi
 	printf '%s' "Cleaning up... "
 	printf '%b' "$CURSOR_SHOW"
 	printf '%b' "$RESET"
-	stty sane
+	stty sane 2>/dev/null || true
 	echo "Goodbye!"; trap - EXIT
-	exit
+	exit "$status"
 }
 
 setup_traps() {
-	trap cleanup EXIT
+	trap 'cleanup "$?"' EXIT
 	for sig in $INTERRUPT_SIGNALS; do
-		trap "cleanup $sig" "$sig"
+		trap "cleanup 1 $sig" "$sig"
 	done
 }
 

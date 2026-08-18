@@ -1,0 +1,35 @@
+tap "homebrew/bundle"
+tap "homebrew/core"
+
+# programming languages and runtimes
+brew "shellcheck"
+brew "julia"
+brew "rust"
+brew "node"
+brew "openjdk"
+brew "perl"
+
+# language servers shared by Vim and Neovim
+brew "lua-language-server"
+brew "rust-analyzer"
+brew "typescript"
+
+# libraries
+brew "glm"
+
+# terminal multiplexer
+brew "tmux"
+brew "bat"
+
+# files finders
+brew "fd"
+brew "fzf"
+brew "ripgrep"
+
+# tools & misc
+brew "gnupg"
+
+# applications
+brew "neovim"
+cask "wezterm"
+cask "ghostty"

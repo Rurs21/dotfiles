@@ -1,19 +1,21 @@
 #!/bin/sh
 
-# log file
 LOGFILE="$HOME/init_dotfiles.log"
-echo "" > "$LOGFILE"
+: > "$LOGFILE"
 
 SCRIPT_DIR=$(cd "$(dirname -- "$0")" && pwd)
+CONFIG_HOME=${XDG_CONFIG_HOME:-"$HOME/.config"}
 . "$SCRIPT_DIR/_lib.sh"
 
 setup_traps
 
 echo_bold "POSIX init script\n"
 
+mkdir -p "$HOME/tmp" "$CONFIG_HOME/sh" || echo_fatal "config directories"
+
 prompt_sudo
 
-if [ $(uname) = Darwin ]; then
+if [ "$(uname -s)" = "Darwin" ]; then
 	echo "For MacOS..."
 	# install xcode
 	echo_running "Installing xcode tools... "
@@ -22,32 +24,56 @@ if [ $(uname) = Darwin ]; then
 	fi
 	if prompt_yn "Update xcode tools ?"; then
 		echo_running "Updating xcode tools... "
-		sudo softwareupdate -i -a >> "$LOGFILE" 2>&1 
+		# The log belongs to the current user; only softwareupdate needs sudo.
+		# shellcheck disable=SC2024
+		sudo softwareupdate -i -a >> "$LOGFILE" 2>&1
 	fi
 	echo_ok "xcode tools"
 	# install brew
 	echo_running "Installing brew... "
 	if ! is_installed brew; then
-		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" || echo_fatal
+		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || echo_fatal "brew"
+		eval "$(/opt/homebrew/bin/brew shellenv)"
 	else
 		echo_running "Updating brew... "
 		brew update >> "$LOGFILE" 2>&1
 		brew upgrade >> "$LOGFILE" 2>&1
 	fi
+	is_installed brew || echo_fatal "brew is not available"
 	echo_ok "brew"
+
+	echo_running "Installing Brewfile dependencies... "
+	BREWFILE="$SCRIPT_DIR/dependencies/Brewfile"
+	[ -f "$BREWFILE" ] || echo_fatal "Missing Brewfile: $BREWFILE"
+	brew bundle install --file="$BREWFILE" >> "$LOGFILE" 2>&1 \
+		|| echo_fatal "Brewfile dependencies"
+	echo_ok "Brewfile dependencies"
 fi
 
 
 echo_running "Installing vim-plug... "
-if [ ! -e ~/.config/vim/autoload/plug.vim ]; then
-	curl -fLo ~/.config/vim/autoload/plug.vim --create-dirs \
-		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+VIM_PLUG="$CONFIG_HOME/vim/autoload/plug.vim"
+if [ ! -e "$VIM_PLUG" ]; then
+	curl -fLo "$VIM_PLUG" --create-dirs \
+		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim \
+		|| echo_fatal "vim-plug"
 fi
 echo_ok "vim-plug"
 
 echo_running "Installing tmux tpm... "
-if [ ! -e ~/.config/tmux/plugins/tpm ]; then
-	git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+TPM_DIR="$CONFIG_HOME/tmux/plugins/tpm"
+if [ ! -e "$TPM_DIR" ]; then
+	mkdir -p "$(dirname "$TPM_DIR")" || echo_fatal "tmux plugin directory"
+	git clone https://github.com/tmux-plugins/tpm "$TPM_DIR" \
+		>> "$LOGFILE" 2>&1 || echo_fatal "tmux tpm"
 fi
 echo_ok "tmux tpm"
 
+echo_running "Installing antidote... "
+ANTIDOTE_DIR=${ZDOTDIR:-"${XDG_CONFIG_HOME:-$HOME/.config}/zsh"}/.antidote
+if [ ! -d "$ANTIDOTE_DIR" ]; then
+	mkdir -p "$(dirname "$ANTIDOTE_DIR")" || echo_fatal "antidote directory"
+	git clone --depth=1 https://github.com/mattmc3/antidote.git "$ANTIDOTE_DIR" \
+		>> "$LOGFILE" 2>&1 || echo_fatal "antidote"
+fi
+echo_ok "antidote"
