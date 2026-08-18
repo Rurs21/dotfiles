@@ -1,12 +1,10 @@
 [user]
 	name = Rurs21
-	email = rurs21@protonmail.com
-	signingkey = $GPG_SIGNING_KEY
+	email = me@rurs21.dev
 [color]
 	ui = true
 [core]
 	editor = vim
-	excludesfile = ~/.gitignore
 [gpg]
 	program = gpg
 [commit]
@@ -22,3 +20,5 @@
 	empty = commit --allow-empty
 [init]
 	defaultBranch = main
+[include]
+    path = local.config

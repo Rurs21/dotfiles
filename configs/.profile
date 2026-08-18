@@ -7,12 +7,13 @@ export BROWSER=firefox
 
 # define locale
 export LANG=en_US.UTF-8
-export LC_ALL=$LANG
 export LC_COLLATE=$LANG
 export LC_CTYPE=$LANG
 export LC_MESSAGES=C
 export LC_NUMERIC=C
 export LC_TIME=fr_CA.UTF-8
+export LC_MONETARY=fr_CA.UTF-8
+# export LC_ALL=$LANG
 
 # temporary folder
 export TMP=$HOME/tmp

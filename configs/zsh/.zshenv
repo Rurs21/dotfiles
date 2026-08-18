@@ -1,2 +1,3 @@
-export GPG_TTY=$(tty)
+# Keep PATH entries unique.
+typeset -U path PATH
 
