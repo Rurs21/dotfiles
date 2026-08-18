@@ -1,4 +1,4 @@
-call plug#begin('~/.config/vim/plugged')
+call plug#begin($DATA_HOME . '/vim/plugged')
 
 	" fuzzy finder
 	Plug 'junegunn/fzf'

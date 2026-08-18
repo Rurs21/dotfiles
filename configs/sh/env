@@ -1,0 +1,9 @@
+# shell specific environment variables
+
+# shell history
+export HISTFILE="$STATE_HOME/sh/history"
+export HISTSIZE=10000
+export HISTFILESIZE=20000
+export HISTCONTROL=ignoreboth
+export HISTIGNORE="&:ls:[bf]g:exit"
+

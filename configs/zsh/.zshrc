@@ -1,5 +1,8 @@
 # .zshrc
 
+mkdir -p "$CACHE_HOME/zsh" "$STATE_HOME/zsh"
+export HISTFILE="$STATE_HOME/zsh/history"
+
 if GPG_TTY=$(tty 2>/dev/null); then
 	export GPG_TTY
 fi
@@ -19,7 +22,7 @@ alias colors='~/Scripts/colors.sh'
 alias gittime='~/Code/Scripts/gittime.sh'
 alias increname='~/Code/Scripts/increname.sh'
 
-source ~/.aliases
+source $HOME/.aliases
 
 alias npm='nocorrect npm'
 alias python=python3
@@ -33,7 +36,7 @@ bindkey "^[[3~" delete-char
 autoload -U zmv
 autoload -Uz vcs_info
 autoload -Uz compinit
-compinit -i
+compinit -i -d "$CACHE_HOME/zsh/zcompdump"
 
 # Features
 unsetopt beep

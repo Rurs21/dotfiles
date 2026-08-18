@@ -1,11 +1,15 @@
 #!/bin/sh
 
-LOGFILE="$HOME/init_dotfiles.log"
-: > "$LOGFILE"
-
 SCRIPT_DIR=$(cd "$(dirname -- "$0")" && pwd)
-CONFIG_HOME=${XDG_CONFIG_HOME:-"$HOME/.config"}
 . "$SCRIPT_DIR/_lib.sh"
+
+CONFIG_HOME=${CONFIG_HOME:-"$HOME/.config"}
+DATA_HOME=${DATA_HOME:-"$HOME/.local/share"}
+STATE_HOME=${STATE_HOME:-"$HOME/.local/state"}
+
+mkdir -p "$STATE_HOME/dotfiles" || echo_fatal "state directory"
+LOGFILE="$STATE_HOME/dotfiles/init.log"
+: > "$LOGFILE"
 
 setup_traps
 
@@ -52,7 +56,7 @@ fi
 
 
 echo_running "Installing vim-plug... "
-VIM_PLUG="$CONFIG_HOME/vim/autoload/plug.vim"
+VIM_PLUG="$DATA_HOME/vim/autoload/plug.vim"
 if [ ! -e "$VIM_PLUG" ]; then
 	curl -fLo "$VIM_PLUG" --create-dirs \
 		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim \
@@ -61,7 +65,7 @@ fi
 echo_ok "vim-plug"
 
 echo_running "Installing tmux tpm... "
-TPM_DIR="$CONFIG_HOME/tmux/plugins/tpm"
+TPM_DIR="$DATA_HOME/tmux/plugins/tpm"
 if [ ! -e "$TPM_DIR" ]; then
 	mkdir -p "$(dirname "$TPM_DIR")" || echo_fatal "tmux plugin directory"
 	git clone https://github.com/tmux-plugins/tpm "$TPM_DIR" \
@@ -70,7 +74,7 @@ fi
 echo_ok "tmux tpm"
 
 echo_running "Installing antidote... "
-ANTIDOTE_DIR=${ZDOTDIR:-"${XDG_CONFIG_HOME:-$HOME/.config}/zsh"}/.antidote
+ANTIDOTE_DIR="$DATA_HOME/zsh/antidote"
 if [ ! -d "$ANTIDOTE_DIR" ]; then
 	mkdir -p "$(dirname "$ANTIDOTE_DIR")" || echo_fatal "antidote directory"
 	git clone --depth=1 https://github.com/mattmc3/antidote.git "$ANTIDOTE_DIR" \

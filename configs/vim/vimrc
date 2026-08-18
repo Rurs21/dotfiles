@@ -1,23 +1,24 @@
 " shared baseline for Vim and Neovim
-source ~/.config/vim/settings/options.vim
-source ~/.config/vim/settings/keymaps.vim
-source ~/.config/vim/settings/filetypes.vim
-source ~/.config/vim/settings/statusline.vim
+source $CONFIG_HOME/vim/settings/options.vim
+source $CONFIG_HOME/vim/settings/keymaps.vim
+source $CONFIG_HOME/vim/settings/filetypes.vim
+source $CONFIG_HOME/vim/settings/statusline.vim
 
-set runtimepath+=~/.config/vim
+set runtimepath+=$CONFIG_HOME/vim
+set runtimepath+=$DATA_HOME/vim
 
 if has('nvim')
 	finish
 endif
 
 " load vim specific plugins
-source ~/.config/vim/settings/plugins.vim
+source $CONFIG_HOME/vim/settings/plugins.vim
 
 " configure Vim's adapter for the shared language servers
-source ~/.config/vim/settings/lsp.vim
+source $CONFIG_HOME/vim/settings/lsp.vim
 
 " follow the terminal/system appearance
-source ~/.config/vim/settings/colors.vim
+source $CONFIG_HOME/vim/settings/colors.vim
 
 " Prevent screen clearing issues in certain terminals
 let &t_ut=''

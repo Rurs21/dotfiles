@@ -26,23 +26,21 @@ export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
 export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 export XDG_STATE_HOME=${XDG_STATE_HOME:-$HOME/.local/state}
 
-export CONFIG_DIR=$XDG_CONFIG_HOME
+# short alias because typing XDG_SOMETHING_HOME gets old fast
+export CONFIG_HOME=$XDG_CONFIG_HOME
+export CACHE_HOME=$XDG_CACHE_HOME
+export DATA_HOME=$XDG_DATA_HOME
+export STATE_HOME=$XDG_STATE_HOME
 
-# shell histroy
-export HISTFILE="$CONFIG_DIR/sh/.history"
-export HISTSIZE=10000
-export HISTFILESIZE=20000
-export HISTCONTROL=ignoreboth
-export HISTIGNORE="&:ls:[bf]g:exit"
-
-. "$CONFIG_DIR/sh/.secrets.env"
+. "$CONFIG_HOME/sh/env"
+. "$CONFIG_HOME/sh/.secrets.env"
 
 CARGO_ENV="$HOME/.cargo/env"
 if [ -e "$CARGO_ENV" ]; then
 	. "$HOME/.cargo/env"
 fi
 
-export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
+export RIPGREP_CONFIG_PATH="$CONFIG_HOME/ripgrep/config"
 
 export PROFILE_READ=true
 

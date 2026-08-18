@@ -50,7 +50,7 @@ set colorcolumn=80
 set visualbell
 
 " Vim persistent undo directory. Neovim overrides this in core/options.lua.
-let &undodir = expand('~/.vim/undo')
+let &undodir = $STATE_HOME . '/vim/undo'
 call mkdir(&undodir, 'p', 0700)
 set undofile
 

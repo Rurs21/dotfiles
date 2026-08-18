@@ -3,7 +3,7 @@
 
 # TODO use sed or awk to use same file for last_statup date
 echo $0
-TIMESTAMP_FILE="$HOME/.last_startup"
+TIMESTAMP_FILE="$STATE_HOME/.last_startup"
 
 TODAY=`date +%Y-%m-%d`
 

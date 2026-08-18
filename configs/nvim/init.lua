@@ -10,11 +10,11 @@ local datetime_message = string.format(
 print(datetime_message)
 
 -- use vim config as the shared baseline
-local vim_home = vim.fn.expand("~/.config/vim")
-local vim_config = vim_home .. "/vimrc"
+local vim_home = vim.fs.dirname(vim.fn.stdpath("config")) .. "/vim"
+vim.g.vim_config_home = vim_home
 
 -- load vim config
-vim.cmd.source(vim.fn.fnameescape(vim_config))
+vim.cmd.source(vim_home .. "/vimrc")
 -- load vim runtime config
 vim.opt.rtp:prepend(vim_home)
 vim.opt.rtp:append(vim_home .. '/after')

@@ -19,7 +19,8 @@ end
 -- prepend plugins data directory to vim runtime path
 vim.opt.rtp:prepend(lazypath)
 
-local vim_home = vim.fn.expand("~/.config/vim")
+-- preserve the shared Vim runtime paths when Lazy resets runtimepath below
+local vim_home = vim.g.vim_config_home
 
 return require('lazy').setup('plugins', {
 	defaults = {

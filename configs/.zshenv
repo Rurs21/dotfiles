@@ -2,9 +2,10 @@ if [ "$PROFILE_READ" != "true" ]; then
 	. $HOME/.profile
 fi
 
-export ZDOTDIR=${ZDOTDIR:-$CONFIG_DIR/zsh}
+export ZDOTDIR=${ZDOTDIR:-$CONFIG_HOME/zsh}
 export SHELLRC=$ZDOTDIR/.zshrc
 export TMPPREFIX=$TMPDIR/zsh
 
-source $ZDOTDIR/.zshenv
+# Keep PATH entries unique.
+typeset -U path PATH
 

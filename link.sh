@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# Link this repository's dotfiles into HOME and XDG_CONFIG_HOME.
-# Top-level hidden entries stay in HOME; config directories use XDG_CONFIG_HOME.
+# Link this repository's dotfiles into HOME and CONFIG_HOME.
+# Top-level hidden entries stay in HOME; config directories use CONFIG_HOME.
 
 # Run from script's directory to handle relative paths
 cd "$(dirname -- "$0")" || exit 1
@@ -9,7 +9,7 @@ cd "$(dirname -- "$0")" || exit 1
 . "./_lib.sh"
 
 CONFLICTS=0
-CONFIG_HOME=${XDG_CONFIG_HOME:-"$HOME/.config"}
+CONFIG_HOME=${CONFIG_HOME:-"$HOME/.config"}
 
 # Link one file. Existing symlinks are refreshed; real files are left alone.
 link_file() {
