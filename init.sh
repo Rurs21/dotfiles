@@ -3,24 +3,29 @@
 SCRIPT_DIR=$(cd "$(dirname -- "$0")" && pwd)
 . "$SCRIPT_DIR/_lib.sh"
 
-CONFIG_HOME=${CONFIG_HOME:-"$HOME/.config"}
-DATA_HOME=${DATA_HOME:-"$HOME/.local/share"}
-STATE_HOME=${STATE_HOME:-"$HOME/.local/state"}
-
-mkdir -p "$STATE_HOME/dotfiles" || echo_fatal "state directory"
-LOGFILE="$STATE_HOME/dotfiles/init.log"
-: > "$LOGFILE"
-
 setup_traps
 
 echo_bold "POSIX init script\n"
 
-mkdir -p "$HOME/tmp" "$CONFIG_HOME/sh" || echo_fatal "config directories"
+# link the dotfiles
+"$SCRIPT_DIR/link.sh" || echo_fatal "linking dotfiles"
+
+# load potentially unread repository's environment
+if [ "${PROFILE_READ:-false}" != true ]; then
+	. "$SCRIPT_DIR/configs/.profile"
+fi
+
+mkdir -p "$CACHE_HOME" "$DATA_HOME" "$STATE_HOME" "$TMP" \
+	|| echo_fatal "user directories"
+
+LOGFILE="$STATE_HOME/init.log"
+: > "$LOGFILE"
 
 prompt_sudo
 
 if [ "$(uname -s)" = "Darwin" ]; then
 	echo "For MacOS..."
+
 	# install xcode
 	echo_running "Installing xcode tools... "
 	if [ ! -e /Library/Developer/CommandLineTools/usr/bin/git ]; then
@@ -33,6 +38,7 @@ if [ "$(uname -s)" = "Darwin" ]; then
 		sudo softwareupdate -i -a >> "$LOGFILE" 2>&1
 	fi
 	echo_ok "xcode tools"
+
 	# install brew
 	echo_running "Installing brew... "
 	if ! is_installed brew; then
@@ -46,14 +52,14 @@ if [ "$(uname -s)" = "Darwin" ]; then
 	is_installed brew || echo_fatal "brew is not available"
 	echo_ok "brew"
 
-	echo_running "Installing Brewfile dependencies... "
+	echo_running "Installing dependencies... "
 	BREWFILE="$SCRIPT_DIR/dependencies/Brewfile"
 	[ -f "$BREWFILE" ] || echo_fatal "Missing Brewfile: $BREWFILE"
-	brew bundle install --file="$BREWFILE" >> "$LOGFILE" 2>&1 \
-		|| echo_fatal "Brewfile dependencies"
-	echo_ok "Brewfile dependencies"
+	run_and_sweep "$LOGFILE" \
+		brew bundle install --file="$BREWFILE" \
+		|| echo_fatal "dependencies — see $LOGFILE"
+	echo_ok "dependencies"
 fi
-
 
 echo_running "Installing vim-plug... "
 VIM_PLUG="$DATA_HOME/vim/autoload/plug.vim"

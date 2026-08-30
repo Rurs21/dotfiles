@@ -33,6 +33,7 @@ echo_warn() {
 	printf '%b\n' "${YELLOW}[warning]${RESET} $1"
 }
 
+
 echo_fatal() {
 	printf '%b' "$CLEAR_LINE"
 	printf '%b\n' "${RED}[error]${RESET} $1"; exit 1
@@ -43,6 +44,21 @@ echo_fatal() {
 silent() {
 	"$@" >/dev/null 2>&1
 }
+
+# run the command, log failures, erase the temporary output
+run_and_sweep() (
+	output_log=$1
+	shift
+
+	[ -t 1 ] && printf '%b\n' "${ESC}s"
+
+	"$@" 2>> "$output_log"
+	command_status=$?
+
+	[ -t 1 ] && printf '%b' "${ESC}u${ESC}J"
+
+	return "$command_status"
+)
 
 is_installed() {
 	silent command -v "$1" && return 0 || return 1
