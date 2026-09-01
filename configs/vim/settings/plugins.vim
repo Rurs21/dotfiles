@@ -27,5 +27,8 @@ call plug#begin($DATA_HOME . '/vim/plugged')
 	let g:javascript_plugin_jsdoc = 1
 
 	Plug 'digitaltoad/vim-pug'
-call plug#end()
 
+	Plug 'lervag/vimtex', { 'tag': 'v2.17' }
+	let g:vimtex_compiler_latexmk = { 'aux_dir': '.aux', 'out_dir': '' }
+
+call plug#end()
