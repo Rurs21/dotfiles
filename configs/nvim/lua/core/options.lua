@@ -1,8 +1,8 @@
 -- Neovim-specific options belong here
 vim.opt.inccommand = "split"
 
--- Vim and Neovim persistent undo files use incompatible formats
-local undo_dir = vim.fn.stdpath("state") .. "/undo"
-vim.fn.mkdir(undo_dir, "p", 448)
-vim.opt.undodir = undo_dir
+-- TODO: on Vim 9.2+, consider removing this
+-- undo vim/settings/options.vim overrding these with vim's 9.1 config
+vim.opt.undodir = vim.fn.stdpath("state") .. "/undo"
+vim.opt.shadafile = vim.fn.stdpath("state") .. "/shada/main.shada"
 

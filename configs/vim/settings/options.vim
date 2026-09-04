@@ -50,9 +50,15 @@ set colorcolumn=80
 set visualbell
 
 " Vim persistent undo directory. Neovim overrides this in core/options.lua.
+" TODO: on Vim 9.2+, undodir defaults to XDG state dir already; drop this.
 let &undodir = $STATE_HOME . '/vim/undo'
 call mkdir(&undodir, 'p', 0700)
 set undofile
+
+" Keep .viminfo out of $HOME
+" TODO: on Vim 9.2+, viminfofile defaults to XDG state dir already; drop this.
+call mkdir($STATE_HOME . '/vim', 'p', 0700)
+set viminfofile=$STATE_HOME/vim/viminfo
 
 " Files stuff
 set isfname+=@-@

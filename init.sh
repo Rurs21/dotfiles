@@ -11,7 +11,7 @@ echo_bold "POSIX init script\n"
 "$SCRIPT_DIR/link.sh" || echo_fatal "linking dotfiles"
 
 # load potentially unread repository's environment
-if [ "${PROFILE_READ:-false}" != true ]; then
+if [ -z ${PROFILE_LOADED:-} ]; then
 	. "$SCRIPT_DIR/configs/.profile"
 fi
 

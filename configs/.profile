@@ -11,7 +11,7 @@ export LC_COLLATE=$LANG
 export LC_CTYPE=$LANG
 export LC_MESSAGES=C
 export LC_NUMERIC=C
-export LC_TIME=fr_CA.UTF-8
+export LC_TIME=C
 export LC_MONETARY=fr_CA.UTF-8
 # export LC_ALL=$LANG
 
@@ -32,15 +32,16 @@ export CACHE_HOME=$XDG_CACHE_HOME
 export DATA_HOME=$XDG_DATA_HOME
 export STATE_HOME=$XDG_STATE_HOME
 
-. "$CONFIG_HOME/sh/env"
-. "$CONFIG_HOME/sh/.secrets.env"
+. $CONFIG_HOME/sh/env
+. $CONFIG_HOME/sh/basedir.env
+. $CONFIG_HOME/sh/.secrets.env
 
-CARGO_ENV="$HOME/.cargo/env"
-if [ -e "$CARGO_ENV" ]; then
-	. "$HOME/.cargo/env"
-fi
+# user local bin
+export PATH="$HOME/.local/bin:$PATH"
 
-export RIPGREP_CONFIG_PATH="$CONFIG_HOME/ripgrep/config"
+# dedupe PATH in case .profile gets sourced more than once
+PATH=$(printf '%s' "$PATH" | awk -v RS=: '!seen[$0]++{printf(NR>1?":":"")$0}')
+export PATH
 
-export PROFILE_READ=true
+export PROFILE_LOADED=true
 

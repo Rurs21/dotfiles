@@ -20,6 +20,9 @@ xnoremap <Right> <Nop>
 
 " leave out the inoremap declarations so arrows continue working in insert mode
 
+" quick escape from insert mode
+inoremap jj <Esc>
+
 " move lines
 nnoremap <silent> <A-j> <Cmd>move .+1<CR>==
 nnoremap <silent> <A-k> <Cmd>move .-2<CR>==
