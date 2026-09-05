@@ -31,23 +31,25 @@ link_file() {
 	fi
 }
 
-# Recursively symlink files from src to dest
+# recursively symlink files from src to dest
 # $1=src $2=dest
 relink() {
-	# Iterate over files and directories, including hidden, skipping _* and . ..
+	# iterate over files and directories, including hidden, skipping _* and . ..
 	for file in "$1"/[!._]* "$1"/.[!.]* "$1"/..?*; do
+		# skip inexistent or symbolic link
 		[ -e "$file" ] || [ -L "$file" ] || continue
 		file_name=$(basename "$file")
+		
+		# put top-level, non-hidden directories in CONFIG_HOME.
+		if [ "$2" = "$HOME" ] && [ "${file_name#.*}" = "$file_name" ]; then
+			subdir="$CONFIG_HOME/$file_name"
+		else
+			subdir="$2/$file_name"
+		fi
 
 		if [ -f "$file" ] || [ -L "$file" ]; then
-			link_file "$file" "$2/$file_name"
+			link_file "$file" "$subdir"
 		elif [ -d "$file" ]; then
-			# Put top-level, non-hidden directories in CONFIG_HOME.
-			if [ "$2" = "$HOME" ] && [ "${file_name#.*}" = "$file_name" ]; then
-				subdir="$CONFIG_HOME/$file_name"
-			else
-				subdir="$2/$file_name"
-			fi
 			mkdir -p "$subdir" || echo_fatal "Could not create $subdir"
 			relink "$file" "$subdir" # Recurse
 		fi
