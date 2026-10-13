@@ -16,6 +16,11 @@ brew "typescript"
 # libraries
 brew "glm"
 
+# version control
+brew "git"
+brew "git-delta"
+brew "gh"
+
 # terminal multiplexer
 brew "tmux"
 brew "bat"

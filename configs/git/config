@@ -5,6 +5,7 @@
 	ui = true
 [core]
 	editor = vim
+	pager = delta
 [gpg]
 	program = gpg
 [commit]
@@ -18,6 +19,13 @@
 	commit-at = !sh -c 'LC_ALL=C GIT_COMMITTER_DATE=\"$1\" git commit --date \"$1\"' -
 	amend = commit --amend
 	empty = commit --allow-empty
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	line-numbers = true
+[merge]
+	conflictStyle = zdiff3
 [init]
 	defaultBranch = main
 [include]
