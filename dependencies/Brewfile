@@ -34,6 +34,7 @@ brew "ripgrep"
 brew "gnupg"
 
 # applications
+brew "vim"
 brew "neovim"
 cask "wezterm"
 cask "ghostty"

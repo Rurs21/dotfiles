@@ -1,0 +1,6 @@
+source-path=SCRIPTDIR
+# disable=SC1090  # Can't follow non-constant/dynamic source paths
+# disable=SC1091	# Not following source statements (file not found/unreadable)
+disable=SC2086	# Disable unquoted variable warnings
+# disable=SC2046	# Quote to prevent word splitting of $()
+

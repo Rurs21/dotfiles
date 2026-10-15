@@ -1,0 +1,9 @@
+#env
+# needs less >= 599
+#
+# -i  case-insensitive search unless the pattern has an uppercase letter
+# -R  pass ANSI colors through (git, bat, delta)
+# -S  chop long lines instead of wrapping
+# -M  verbose prompt (filename, line range, percentage)
+# -W  highlight the first new line after a forward page
+LESS = -i -R -S -M -W
